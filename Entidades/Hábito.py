@@ -20,7 +20,7 @@ class Habito:
     #Creamos los métodos de instancia
     def activar (self):
         self.activo = True
-
+ff
     def esta_activo(self):
         return self.activo
 
