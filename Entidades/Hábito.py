@@ -1,7 +1,5 @@
 #Definimos la clase padre Habito de la que derivaran el resto de clases hijas
 
-
-
 class Habito:
     total_habitos=0
     def __init__(self, identificador, nombre, frecuencia, activo, recordatorio = False):
@@ -16,11 +14,10 @@ class Habito:
 
 #Inicializamos el atributo recordatorio en false porque no sabemos si el ususario quiere ser avisado o simplemente quiere una to-do list
 
-
     #Creamos los métodos de instancia
     def activar (self):
         self.activo = True
-ff
+
     def esta_activo(self):
         return self.activo
 
