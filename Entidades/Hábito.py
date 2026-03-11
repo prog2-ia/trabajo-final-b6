@@ -1,6 +1,7 @@
 #Definimos la clase padre Habito de la que derivaran el resto de clases hijas
+from abc import ABC, abstractmethod
 
-class Habito:
+class Habito(ABC):
     total_habitos=0
     def __init__(self, identificador, nombre, frecuencia, activo, recordatorio = False):
         self.identificador = identificador
@@ -42,5 +43,7 @@ class Habito:
         return f'El usuario tiene un total de {cls.total_habitos}'
 
 
-
+    @abstractmethod
+    def verificar_regla(self):
+        pass
 

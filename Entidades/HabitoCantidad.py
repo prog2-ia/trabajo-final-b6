@@ -20,3 +20,6 @@ class HabitoCantidad(Habito):
 
     def esta_activo(self):
         return self.activo
+
+    def verificar_regla(self):
+        return self.cantidad_actual >= self.objetivo  # Umbral: objetivo alcanzado
