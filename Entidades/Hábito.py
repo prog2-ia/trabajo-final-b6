@@ -1,49 +1,48 @@
-#Definimos la clase padre Habito de la que derivaran el resto de clases hijas
 from abc import ABC, abstractmethod
 
+
 class Habito(ABC):
-    total_habitos=0
-    def __init__(self, identificador, nombre, frecuencia, activo, recordatorio = False):
-        self.identificador = identificador
-        self.nombre = nombre
-        self.frecuencia = frecuencia
-        self.activo = activo
-        self.recordatorio = recordatorio
-        self.dia = None
-        self.hora = None
+
+    total_habitos = 0
+
+    def __init__(self, identificador, nombre, frecuencia):
+        self._identificador = identificador
+        self._nombre = nombre
+        self._frecuencia = frecuencia
+        self._activo = True
         type(self).total_habitos += 1
 
-#Inicializamos el atributo recordatorio en false porque no sabemos si el ususario quiere ser avisado o simplemente quiere una to-do list
+    # --- Propiedades ---
 
-    #Creamos los métodos de instancia
-    def activar (self):
-        self.activo = True
+    @property
+    def identificador(self):
+        return self._identificador
 
-    def esta_activo(self):
-        return self.activo
+    @property
+    def nombre(self):
+        return self._nombre
 
-    def activar_recordatorio(self, dia, hora):
-        self.recordatorio = True
-        self.dia=dia
-        self.hora=hora
+    @property
+    def frecuencia(self):
+        return self._frecuencia
 
-    def desactivar_recordatorio(self):
-        self.recordatorio = False
-        self.dia = None
-        self.hora = None
+    @property
+    def activo(self):
+        return self._activo
 
+    # --- Métodos ---
+
+    def activar(self):
+        self._activo = True
 
     def pausar(self):
-        self.activo=False
+        self._activo = False
 
-
-    #Creamos métodos de clase
     @classmethod
-    def total_habito(cls):
-        return f'El usuario tiene un total de {cls.total_habitos}'
+    def total(cls):
+        return cls.total_habitos
 
-
+    # Método abstracto: cada subclase lo implementa a su manera
     @abstractmethod
-    def verificar_regla(self):
+    def cumplido(self):
         pass
-
