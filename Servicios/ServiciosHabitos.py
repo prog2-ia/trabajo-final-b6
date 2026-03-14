@@ -1,6 +1,3 @@
-from entidades.HabitoCheck import HabitoCheck
-from entidades.HabitoCantidad import HabitoCantidad
-
 
 class ServiciosHabitos:
     """Operaciones sobre la lista de hábitos del repositorio."""

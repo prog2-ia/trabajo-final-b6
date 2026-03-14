@@ -1,4 +1,4 @@
-from entidades.Hábito import Habito
+from Entidades.Hábito import Habito
 
 
 class HabitoCantidad(Habito):
