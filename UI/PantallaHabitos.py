@@ -38,15 +38,15 @@ class PantallaHabitos:
         print("2. Cantidad (con objetivo)")
         tipo = input("Tipo: ")
 
-        id = input("ID del hábito: ")
+        hab_id = input("ID del hábito: ")
         nombre = input("Nombre: ")
         frecuencia = input("Frecuencia (diario/semanal/mensual): ")
 
         if tipo == "1":
-            habito = HabitoCheck(id, nombre, frecuencia)
+            habito = HabitoCheck(hab_id, nombre, frecuencia)
         elif tipo == "2":
             objetivo = float(input("Objetivo: "))
-            habito = HabitoCantidad(id, nombre, frecuencia, objetivo)
+            habito = HabitoCantidad(hab_id, nombre, frecuencia, objetivo)
         else:
             print("Tipo no válido.")
             return
@@ -56,13 +56,13 @@ class PantallaHabitos:
 
     def _ver_habitos(self):
         print("\n=== HÁBITOS ===")
-        habitos = self._repo.obtener_todos()
+        habitos = self._servicios.listar_todos()
         if not habitos:
             print("No hay hábitos todavía.")
         else:
             self._servicios.listar_todos()
 
     def _eliminar_habito(self):
-        id = input("ID del hábito a eliminar: ")
-        self._servicios.eliminar_habito(id)
+        hab_id = input("ID del hábito a eliminar: ")
+        self._servicios.eliminar_habito(hab_id)
         print("Hábito eliminado.")

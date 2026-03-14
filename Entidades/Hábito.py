@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class Habito(ABC):
 
     total_habitos = 0
@@ -12,7 +11,7 @@ class Habito(ABC):
         self._activo = True
         type(self).total_habitos += 1
 
-    # --- Propiedades ---
+    #Propiedades
 
     @property
     def identificador(self):
@@ -30,7 +29,7 @@ class Habito(ABC):
     def activo(self):
         return self._activo
 
-    # --- Métodos ---
+    #Métodos
 
     def activar(self):
         self._activo = True

@@ -1,8 +1,8 @@
 from Entidades.Hábito import Habito
 
+# Lo que hace esta clase es marcar como si o no
 
 class HabitoCheck(Habito):
-    """Hábito que se completa marcándolo como hecho (sí/no)."""
 
     def __init__(self, identificador, nombre, frecuencia):
         super().__init__(identificador, nombre, frecuencia)
@@ -18,10 +18,14 @@ class HabitoCheck(Habito):
     def reiniciar(self):
         self._completado = False
 
-    # Implementación del método abstracto
+    # Método abstracto de la clase Habito
     def cumplido(self):
         return self._completado
 
     def __str__(self):
-        estado = "✓ Hecho" if self._completado else "✗ Pendiente"
+        if self._completado:
+            estado="✓ Hecho"
+        else:
+            estado="✗ Pendiente"
+
         return f"[CHECK] {self._nombre} ({self._frecuencia}) - {estado}"
