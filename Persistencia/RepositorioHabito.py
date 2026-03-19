@@ -10,6 +10,10 @@ class RepositorioHabito:
     def eliminar(self, identificador):
         if identificador in self._habitos:
             del self._habitos[identificador]
+            return True
+
+        return False
+
 
     def obtener(self, identificador):
         return self._habitos.get(identificador)

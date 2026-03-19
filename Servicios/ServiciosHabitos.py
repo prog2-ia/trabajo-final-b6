@@ -9,19 +9,31 @@ class ServiciosHabitos:
         self._repositorio.agregar(habito)
 
     def eliminar_habito(self, identificador):
-        self._repositorio.eliminar(identificador)
+        return self._repositorio.eliminar(identificador)
 
     def listar_todos(self):
-        for h in self._repositorio.obtener_todos():
-            print(h)
+       #ordena los hábitos segun su nivel de importancia
+        habitos = self._repositorio.obtener_todos()
+        for i in range(len(habitos)):
+            for j in range(i+1,len(habitos)):
+                if habito[j].importancia > habitos[i].importancia:
+                    aux = habitos[i]
+                    habitos[i] = habitos[j]
+                    habitos[j] = aux
+
+        return habitos
 
     def listar_cumplidos(self):
+        cumplidos= []
+
         for h in self._repositorio.obtener_todos():
             if h.cumplido():
-                print(h)
+                cumplidos.append(h)
+
+        return cumplidos
 
     def resumen(self):
         habitos = self._repositorio.obtener_todos()
         total = len(habitos)
         cumplidos = sum(1 for h in habitos if h.cumplido())
-        print(f"Total: {total} | Cumplidos: {cumplidos} | Pendientes: {total - cumplidos}")
+        return total, cumplidos

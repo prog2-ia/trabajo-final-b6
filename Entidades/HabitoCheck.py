@@ -4,8 +4,8 @@ from Entidades.Hábito import Habito
 
 class HabitoCheck(Habito):
 
-    def __init__(self, identificador, nombre, frecuencia):
-        super().__init__(identificador, nombre, frecuencia)
+    def __init__(self, identificador, nombre, frecuencia, importancia):
+        super().__init__(identificador, nombre, frecuencia, importancia)
         self._completado = False
 
     @property

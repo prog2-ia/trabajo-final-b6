@@ -4,8 +4,8 @@ from Entidades.Hábito import Habito
 class HabitoCantidad(Habito):
     """Hábito que se completa al alcanzar una cantidad objetivo."""
 
-    def __init__(self, identificador, nombre, frecuencia, objetivo):
-        super().__init__(identificador, nombre, frecuencia)
+    def __init__(self, identificador, nombre, frecuencia, importancia, objetivo):
+        super().__init__(identificador, nombre, frecuencia, importancia)
         self._objetivo = objetivo
         self._cantidad_actual = 0
 
@@ -28,5 +28,5 @@ class HabitoCantidad(Habito):
         return self._cantidad_actual >= self._objetivo
 
     def __str__(self):
-        estado = "✓ Cumplido" if self.cumplido() else "✗ En progreso"
-        return f"[CANTIDAD] {self._nombre} ({self._frecuencia}) - {self._cantidad_actual}/{self._objetivo} - {estado}"
+        estado = "Cumplido" if self.cumplido() else "En progreso"
+        return f"Cantidad: {self._nombre} ({self._frecuencia}) - {self._cantidad_actual}/{self._objetivo} - {estado}"

@@ -4,27 +4,32 @@ class Habito(ABC):
 
     total_habitos = 0
 
-    def __init__(self, identificador, nombre, frecuencia, importancia, fecha=list):
+    def __init__(self, identificador, nombre, frecuencia, importancia, fecha=None):
         self._identificador = identificador
         self._nombre = nombre
         self._frecuencia = frecuencia
         self._activo = True
         type(self).total_habitos += 1
-        self.importancia = importancia
-        self.fecha = fecha
-        self.reviews= []
+        self._importancia = importancia
+        if fecha == None:
+            self._fecha = []
+
+        else:
+            self._fecha = fecha
+
+        self._reviews= []
 
     #Propiedades
     @property
     def importancia(self):
-        return  self.importancia
+        return  self._importancia
 
     @importancia.setter
     def importancia(self, value):
         if value < 1 or value > 5:
             print("El valor de importancia debe estar entre el 1 y 5")
         else:
-            self.importancia = value
+            self._importancia = value
     @property
     def identificador(self):
         return self._identificador

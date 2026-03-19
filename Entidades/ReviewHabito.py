@@ -1,4 +1,3 @@
-from datetime import date
 class Review:
     def __init__(self, fecha, nota, comentario):
         self._fecha = fecha
@@ -17,17 +16,9 @@ class Review:
         else:
             self._nota = float(value)
 
-
     @property
     def fecha(self):
         return self._fecha
-
-    @fecha.setter
-    def fecha(self, value):
-        if  not isinstance(value, date):
-            print( f"La fecha debe ser un objeto de la clase date")
-        else:
-            self._fecha = value
 
     def __str__(self):
         return f"Se ha añadido una review con fecha: {self._fecha} y nota: {self._nota}/10"
