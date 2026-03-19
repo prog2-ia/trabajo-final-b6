@@ -1,4 +1,4 @@
-  class RepositorioHabito:
+class RepositorioHabito:
     """Almacena hábitos en memoria."""
 
     def __init__(self):

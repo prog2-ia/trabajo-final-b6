@@ -12,8 +12,16 @@ class ServiciosHabitos:
         return self._repositorio.eliminar(identificador)
 
     def listar_todos(self):
-        return self._repositorio.obtener_todos()
+       #ordena los hábitos segun su nivel de importancia
+        habitos = self._repositorio.obtener_todos()
+        for i in range(len(habitos)):
+            for j in range(i+1,len(habitos)):
+                if habito[j].importancia > habitos[i].importancia:
+                    aux = habitos[i]
+                    habitos[i] = habitos[j]
+                    habitos[j] = aux
 
+        return habitos
 
     def listar_cumplidos(self):
         cumplidos= []

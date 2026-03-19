@@ -35,13 +35,13 @@ class PantallaHabitos:
             elif opcion == "3":
                 self.eliminar_habito()
             elif opcion == "4":
-                print("¡Hasta luego!")
+                self.crear_rutina()
             elif opcion == "5":
-                self.ver_habitos()
+                self.habito_a_rutina()
             elif opcion == "6":
-                self.eliminar_habito()
+                self.ver_rutinas()
             elif opcion == "7":
-                print("¡Hasta luego!")
+                self.agregar_review()
             elif opcion == "8":
                 print("¡Hasta luego!")
             else:
@@ -56,15 +56,20 @@ class PantallaHabitos:
         hab_id = input("ID del hábito: ")
         nombre = input("Nombre: ")
         frecuencia = input("Frecuencia (diario/semanal/mensual): ")
+        importancia = int(input("Nivel de importancia: "))
 
         if tipo == "1":
-            habito = HabitoCheck(hab_id, nombre, frecuencia)
+            habito = HabitoCheck(hab_id, nombre, frecuencia, importancia)
         elif tipo == "2":
             objetivo = float(input("Objetivo: "))
-            habito = HabitoCantidad(hab_id, nombre, frecuencia, objetivo)
+            habito = HabitoCantidad(hab_id, nombre, frecuencia, importancia, objetivo)
         else:
             print("Tipo no válido.")
             return
+
+        while importancia < 1 or importancia > 5:
+            print("Error: la importancia debe estar entre 1 y 5")
+            importancia = int(input("Nivel de importancia: "))
 
         self._servicios.agregar_habito(habito)
         print(f"Hábito '{nombre}' creado correctamente.")
@@ -75,7 +80,8 @@ class PantallaHabitos:
         if not habitos:
             print("No hay hábitos todavía.")
         else:
-            self._servicios.listar_todos()
+            for habito in self._servicios.listar_todos():
+                print(habito)
 
     def eliminar_habito(self):
         hab_id = input("ID del hábito a eliminar: ")
@@ -92,10 +98,9 @@ class PantallaHabitos:
         rutina = Rutina(nombre)
         self._rutinas.append(rutina)
         print(f"Rutina {nombre} creada satisfactoriamente.")
-
     def habito_a_rutina(self, habito_exito=None):
         nombre= str(input("Introduce el nombre de la rutina: "))
-        id= input("ID del hábito a añadir")
+        ident= input("ID del hábito a añadir")
 
         #Aqui comprobamos si el nombre y el id existen para poder realizar la operación
 
@@ -109,7 +114,7 @@ class PantallaHabitos:
 
         habito_exito= None
         for habito in self._habitos:
-            if habito.identificador == id:
+            if habito.identificador == ident:
                 habito_exito = habito
 
         if habito_exito== None:
@@ -128,10 +133,10 @@ class PantallaHabitos:
                 rutina.resumen()
 
     def agregar_review(self):
-        id= input("ID del hábito: ")
+        ident= input("ID del hábito: ")
         habito_exito = None
         for habito in self._habitos:
-            if habito.identificador == id:
+            if habito.identificador == ident:
                 habito_exito = habito
 
         if habito_exito == None:
