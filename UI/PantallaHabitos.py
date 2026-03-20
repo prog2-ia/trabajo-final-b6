@@ -7,7 +7,6 @@ from Persistencia.RepositorioHabito import RepositorioHabito
 from Servicios.ServiciosHabitos import ServiciosHabitos
 
 
-
 class PantallaHabitos:
 
     def __init__(self):
@@ -23,6 +22,7 @@ class PantallaHabitos:
             print("2. Ver todos los hábitos")
             print("3. Eliminar hábito")
             print("4. Crear Rutina")
+            print("6. Ver rutinas")
             print("5. Añadir hábito a rutina")
             print("7. Añadir review a hábito")
             print("8. Salir")
@@ -58,6 +58,10 @@ class PantallaHabitos:
         frecuencia = input("Frecuencia (diario/semanal/mensual): ")
         importancia = int(input("Nivel de importancia: "))
 
+        while importancia < 1 or importancia > 5:
+            print("Error: la importancia debe estar entre 1 y 5")
+            importancia = int(input("Nivel de importancia: "))
+
         if tipo == "1":
             habito = HabitoCheck(hab_id, nombre, frecuencia, importancia)
         elif tipo == "2":
@@ -80,7 +84,7 @@ class PantallaHabitos:
         if not habitos:
             print("No hay hábitos todavía.")
         else:
-            for habito in self._servicios.listar_todos():
+            for habito in habitos:
                 print(habito)
 
     def eliminar_habito(self):
@@ -113,7 +117,7 @@ class PantallaHabitos:
             print("No existe esa rutina")
 
         habito_exito= None
-        for habito in self._habitos:
+        for habito in self._repo.obtener_todos():
             if habito.identificador == ident:
                 habito_exito = habito
 
@@ -135,7 +139,7 @@ class PantallaHabitos:
     def agregar_review(self):
         ident= input("ID del hábito: ")
         habito_exito = None
-        for habito in self._habitos:
+        for habito in self._repo.obtener_todos():
             if habito.identificador == ident:
                 habito_exito = habito
 
@@ -147,7 +151,7 @@ class PantallaHabitos:
         nota=float(input("Nota: "))
         comentario= str(input("Commentario: "))
         review= Review(fecha, nota, comentario)
-        habito.agregar_review(review)
+        habito.poner_review(review)
         print("Review agregada satisfactoriamente.")
 
 

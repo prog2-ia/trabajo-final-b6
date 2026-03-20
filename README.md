@@ -14,22 +14,36 @@ Un sistema completo de gestión de hábitos desarrollado en Python que permite c
 -  **Interfaz de Usuario**: Interfaz de consola para interactuar con el sistema.
 
 
+## Funcionalidades
+ 
+- Crear hábitos de tipo **Check** (sí/no) o **Cantidad** (con objetivo numérico)
+- Asignar un nivel de **importancia** del 1 al 5 a cada hábito
+- Ver todos los hábitos ordenados por importancia
+- Eliminar hábitos
+- Agrupar hábitos en **rutinas**
+- Añadir **reviews** con fecha, nota y comentario a un hábito
+
 ## Estructura del Proyecto
 
 ```
 trabajo-final-b6/
-├── entidades/
-│   ├── Hábito.py              # Clase abstracta base para hábitos
-│   ├── HabitoCheck.py         # Hábito binario
-│   ├── HabitoCantidad.py      # Hábito medible
-│   └── rutina.py              # Definición de rutinas
-├── persistencia/
-│   └── RepositorioHabito.py   # Almacena hábitos en memoria
-├── servicios/
-│   └── ServiciosHabitos.py    # Operaciones sobre la lista de hábitos del repositorio.
-├── ui/
-│   └── PantallaHabitos.py     # Interfaz de usuario
-├── main.py                    # Punto de entrada principal
-└── README.md                  # Documentación original
+├── Entidades/
+│   ├── Hábito.py            # Clase abstracta base
+│   ├── HabitoCheck.py       # Hábito de tipo sí/no
+│   ├── HabitoCantidad.py    # Hábito con objetivo numérico
+│   ├── ReviewHabito.py      # Reseña asociada a un hábito
+│   └── Rutina.py            # Agrupación de hábitos
+├── Persistencia/
+│   ├── RepositorioHabito.py       # Almacena hábitos en memoria
+│   └── RepositorioReviewHabito.py # Almacena reviews en memoria
+├── Servicios/
+│   ├── ServiciosHabitos.py        # Lógica sobre hábitos
+│   └── ServiciosReviewHabito.py   # Lógica sobre reviews
+├── UI/
+│   └── PantallaHabitos.py   # Interfaz de consola
+├── main.py                  # Punto de entrada
+├── requirements.txt
+└── README.md
+
 ```
 

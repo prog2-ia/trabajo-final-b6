@@ -9,6 +9,7 @@ class Habito(ABC):
         self._nombre = nombre
         self._frecuencia = frecuencia
         self._activo = True
+        # Podríamos usar Habitos.total_habitos y seguiría funcionando, pero si en un futuro separamos HabitoCheck y HabitoCantidad, se quedaría en la clase base
         type(self).total_habitos += 1
         self._importancia = importancia
         if fecha == None:
@@ -49,7 +50,7 @@ class Habito(ABC):
     #Métodos
 
     def poner_review(self, review):
-        self.reviews.append(review)
+        self._reviews.append(review)
 
     def activar(self):
         self._activo = True

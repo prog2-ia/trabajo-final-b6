@@ -1,4 +1,3 @@
-from Entidades import ReviewHabito
 class ServiciosReviewHabito:
     def __init__(self, repositorio):
         self._repositorio = repositorio
@@ -13,11 +12,10 @@ class ServiciosReviewHabito:
         if len(reviews) == 0:
             return 0
 
-
         else:
             total=0
             for review in reviews:
-                total+= review._nota
+                total+= review.nota
 
             return total/len(reviews)
 
@@ -29,7 +27,6 @@ class ServiciosReviewHabito:
         for review in self._repositorio.mostrar_reviews():
             if review.fecha==fecha:
                 resultados.append(review)
-
 
         return resultados
 

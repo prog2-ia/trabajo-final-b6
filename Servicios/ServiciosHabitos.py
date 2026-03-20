@@ -1,6 +1,6 @@
 
 class ServiciosHabitos:
-    """Operaciones sobre la lista de hábitos del repositorio."""
+    #Operaciones sobre la lista de hábitos del repositorio.
 
     def __init__(self, repositorio):
         self._repositorio = repositorio
@@ -12,11 +12,12 @@ class ServiciosHabitos:
         return self._repositorio.eliminar(identificador)
 
     def listar_todos(self):
-       #ordena los hábitos segun su nivel de importancia
+        #esto es un buuble sort, compara dos elementos (i,j) e intercambia si j tiene mayor importancia
+        #el resultado es tener a los hábitos segun su nivel de importancia
         habitos = self._repositorio.obtener_todos()
         for i in range(len(habitos)):
             for j in range(i+1,len(habitos)):
-                if habito[j].importancia > habitos[i].importancia:
+                if habitos[j].importancia > habitos[i].importancia:
                     aux = habitos[i]
                     habitos[i] = habitos[j]
                     habitos[j] = aux

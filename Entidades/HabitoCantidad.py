@@ -2,7 +2,7 @@ from Entidades.Hábito import Habito
 
 
 class HabitoCantidad(Habito):
-    """Hábito que se completa al alcanzar una cantidad objetivo."""
+    #Hábito que se completa al alcanzar una cantidad objetivo.
 
     def __init__(self, identificador, nombre, frecuencia, importancia, objetivo):
         super().__init__(identificador, nombre, frecuencia, importancia)
