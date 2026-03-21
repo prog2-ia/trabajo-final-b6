@@ -102,7 +102,7 @@ class PantallaHabitos:
         nombre= str(input("Introduce el nombre de la rutina: "))
         ident= input("ID del hábito a añadir")
 
-        #Aqui comprobamos si el nombre y el id existen para poder realizar la operación
+        #Comprobamos si el nombre y el id existen para poder realizar la operación
 
         rutina_exito= None
         for rutina in self._rutinas:
@@ -133,6 +133,7 @@ class PantallaHabitos:
             for rutina in self._rutinas:
                 rutina.resumen()
 
+    #Buscamos un hábito por su ID para asociarle una review
     def agregar_review(self):
         ident= input("ID del hábito: ")
         habito_exito = None

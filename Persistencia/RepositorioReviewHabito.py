@@ -1,5 +1,5 @@
 class RepositorioReviewHabito:
-
+    """Gestiona el almacenamiento de reviews de hábitos."""
     def __init__(self):
         self._reviews = []
 

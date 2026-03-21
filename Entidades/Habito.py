@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
 
 class Habito(ABC):
-
+    """
+    Crea la estructura del habito que añade el usuario.
+    Puede ser de tipo check o cantidad
+    """
     total_habitos = 0
 
     def __init__(self, identificador, nombre, frecuencia, importancia, fecha=None):
@@ -20,7 +23,7 @@ class Habito(ABC):
 
         self._reviews= []
 
-    #Propiedades
+    #Propiedades (control de acceso)
     @property
     def importancia(self):
         return  self._importancia
@@ -47,7 +50,7 @@ class Habito(ABC):
     def activo(self):
         return self._activo
 
-    #Métodos
+    #Métodos de instancia
 
     def poner_review(self, review):
         self._reviews.append(review)
@@ -62,7 +65,7 @@ class Habito(ABC):
     def total(cls):
         return cls.total_habitos
 
-    # Método abstracto: cada subclase lo implementa a su manera
+    # Método abstracto
     @abstractmethod
     def cumplido(self):
         pass

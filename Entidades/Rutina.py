@@ -1,5 +1,5 @@
 class Rutina:
-    #Agrupa varios hábitos bajo un mismo nombre.
+    """Agrupa varios hábitos bajo un mismo nombre."""
 
     @property
     def nombre(self):

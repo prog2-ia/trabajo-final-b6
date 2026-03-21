@@ -1,7 +1,7 @@
-from Entidades.Hábito import Habito
+from Entidades.Habito import Habito
 from Entidades.Notificable import Notificable
 
-# Lo que hace esta clase es marcar como si o no
+""" Esta clase representa un hábito de tipo check"""
 
 class HabitoCheck(Habito, Notificable):
 
@@ -19,20 +19,20 @@ class HabitoCheck(Habito, Notificable):
     def reiniciar(self):
         self._completado = False
 
-    # Método abstracto de la clase Habito
+    # Implementación del método abstracto de Habito
     def cumplido(self):
         return self._completado
 
     def notificar(self):
         if not self._completado:
-            print(f"🔔 [{self._nombre}] {self.mensaje_alerta()}")
+            print(f" [{self._nombre}] {self.mensaje_alerta()}")
         else:
-            print(f"✅ [{self._nombre}] ¡Ya completado!")
+            print(f" [{self._nombre}] ¡Ya completado!")
 
     def __str__(self):
         if self._completado:
-            estado="✓ Hecho"
+            estado=" Hecho"
         else:
-            estado="✗ Pendiente"
+            estado=" Pendiente"
 
         return f"[CHECK] {self._nombre} ({self._frecuencia}) - {estado}"

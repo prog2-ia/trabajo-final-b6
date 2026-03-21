@@ -1,8 +1,8 @@
-from Entidades.Hábito import Habito
+from Entidades.Habito import Habito
 
 
 class HabitoCantidad(Habito):
-    #Hábito que se completa al alcanzar una cantidad objetivo.
+    """Hábito que se completa al alcanzar una cantidad objetivo."""
 
     def __init__(self, identificador, nombre, frecuencia, importancia, objetivo):
         super().__init__(identificador, nombre, frecuencia, importancia)
@@ -23,16 +23,15 @@ class HabitoCantidad(Habito):
     def reiniciar(self):
         self._cantidad_actual = 0
 
-    # Implementación del método abstracto
     def cumplido(self):
         return self._cantidad_actual >= self._objetivo
 
     def notificar(self):
         restante = self._objetivo - self._cantidad_actual
         if restante > 0:
-            print(f"🔔 [{self._nombre}] Te faltan {restante} unidades. {self.mensaje_alerta()}")
+            print(f"[{self._nombre}] Te faltan {restante} unidades. {self.mensaje_alerta()}")
         else:
-            print(f"✅ [{self._nombre}] ¡Objetivo alcanzado!")
+            print(f"[{self._nombre}] ¡Objetivo alcanzado!")
 
     def __str__(self):
         estado = "Cumplido" if self.cumplido() else "En progreso"

@@ -1,4 +1,5 @@
 class ServiciosReviewHabito:
+     """Gestiona operaciones sobre las reviews almacenadas en el repositorio."""
     def __init__(self, repositorio):
         self._repositorio = repositorio
 

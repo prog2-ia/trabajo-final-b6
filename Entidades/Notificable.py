@@ -1,6 +1,7 @@
 class Notificable:
+    """Clase que se aplica a quelas que pueden genera notificaciones"""
     def notificar(self):
-        raise NotImplementedError
+        return NotImplementedError
 
     def mensaje_alerta(self):
-        return f"⚠️ Recuerda completar tu hábito!"
+        return "¡Recuerda completar tu hábito!"
