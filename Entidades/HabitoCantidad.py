@@ -1,6 +1,5 @@
 from Entidades.Habito import Habito
 
-
 class HabitoCantidad(Habito):
     """Hábito que se completa al alcanzar una cantidad objetivo."""
 

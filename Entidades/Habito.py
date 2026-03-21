@@ -17,7 +17,6 @@ class Habito(ABC):
         self._importancia = importancia
         if fecha == None:
             self._fecha = []
-
         else:
             self._fecha = fecha
 
