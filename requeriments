@@ -1,0 +1,3 @@
+Este proyecto no requiere librerías externas.
+Usa únicamente módulos de la biblioteca estándar de Python (abc).
+Python 3.x requerido.

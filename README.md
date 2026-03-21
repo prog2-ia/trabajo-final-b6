@@ -6,13 +6,12 @@ Un sistema completo de gestión de hábitos desarrollado en Python que permite c
 
 ## Características
 
--  **Gestión de Hábitos Binarios**: Hábitos que se marcan como completados o no (ej. meditar, hacer ejercicio).
--  **Gestión de Hábitos Medibles**: Hábitos con objetivos cuantitativos (ej. beber 2L de agua, leer 30 páginas).
--  **Estadísticas y Análisis**: Cálculo de rachas, porcentajes de cumplimiento y tendencias.
--  **Sistema de Notificaciones**: Soporte para notificaciones por consola, email y SMS.
--  **Validación de Datos**: Validación centralizada con excepciones personalizadas.
--  **Interfaz de Usuario**: Interfaz de consola para interactuar con el sistema.
-
+- **Gestión de Hábitos Binarios**: Hábitos que se marcan como completados o no (ej. meditar, hacer ejercicio).
+- **Gestión de Hábitos Medibles**: Hábitos con objetivos cuantitativos (ej. beber 2L de agua, leer 30 páginas).
+- **Ordenación por Importancia**: Los hábitos se listan ordenados de mayor a menor importancia mediante bubble sort.
+- **Agrupación en Rutinas**: Posibilidad de agrupar varios hábitos bajo una misma rutina.
+- **Sistema de Reviews**: Añadir valoraciones con fecha, nota y comentario a cada hábito.
+- **Interfaz de Consola**: Menú interactivo para gestionar todos los elementos del sistema.
 
 ## Funcionalidades
  

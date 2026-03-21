@@ -5,6 +5,10 @@ class Review:
         self.__comentario= comentario
 
     @property
+    def comentario(self):
+        return self.__comentario
+
+    @property
     def nota(self):
         return self._nota
 

@@ -2,7 +2,6 @@ from Entidades.HabitoCheck import HabitoCheck
 from Entidades.HabitoCantidad import HabitoCantidad
 from Entidades.Rutina import Rutina
 from Entidades.ReviewHabito import Review
-
 from Persistencia.RepositorioHabito import RepositorioHabito
 from Servicios.ServiciosHabitos import ServiciosHabitos
 
@@ -22,8 +21,8 @@ class PantallaHabitos:
             print("2. Ver todos los hábitos")
             print("3. Eliminar hábito")
             print("4. Crear Rutina")
-            print("6. Ver rutinas")
             print("5. Añadir hábito a rutina")
+            print("6. Ver rutinas")
             print("7. Añadir review a hábito")
             print("8. Salir")
             opcion = input("Elige una opción: ")
@@ -71,10 +70,6 @@ class PantallaHabitos:
             print("Tipo no válido.")
             return
 
-        while importancia < 1 or importancia > 5:
-            print("Error: la importancia debe estar entre 1 y 5")
-            importancia = int(input("Nivel de importancia: "))
-
         self._servicios.agregar_habito(habito)
         print(f"Hábito '{nombre}' creado correctamente.")
 
@@ -102,6 +97,7 @@ class PantallaHabitos:
         rutina = Rutina(nombre)
         self._rutinas.append(rutina)
         print(f"Rutina {nombre} creada satisfactoriamente.")
+
     def habito_a_rutina(self, habito_exito=None):
         nombre= str(input("Introduce el nombre de la rutina: "))
         ident= input("ID del hábito a añadir")
@@ -115,6 +111,7 @@ class PantallaHabitos:
 
         if rutina_exito == None:
             print("No existe esa rutina")
+            return
 
         habito_exito= None
         for habito in self._repo.obtener_todos():
@@ -151,7 +148,7 @@ class PantallaHabitos:
         nota=float(input("Nota: "))
         comentario= str(input("Commentario: "))
         review= Review(fecha, nota, comentario)
-        habito.poner_review(review)
+        habito_exito.poner_review(review)
         print("Review agregada satisfactoriamente.")
 
 
