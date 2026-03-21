@@ -1,6 +1,14 @@
 class Rutina:
     #Agrupa varios hábitos bajo un mismo nombre.
 
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @property
+    def habitos(self):
+        return self._habitos
+
     def __init__(self, nombre):
         self._nombre = nombre
         self._habitos = []
