@@ -1,9 +1,10 @@
 class Review:
     """Permite valorar un hábito"""
-    def __init__(self, fecha, nota, comentario):
+    def __init__(self, fecha, nota, comentario, habito):
         self._fecha = fecha
         self._nota= nota
         self.__comentario= comentario #Garantiza privacidad del usuario
+        self._habito = habito
 
     @property
     def comentario(self):
@@ -25,6 +26,10 @@ class Review:
     def fecha(self):
         return self._fecha
 
+    @property
+    def habito(self):
+        return self._habito
+
     def __str__(self):
-        return f"Se ha añadido una review con fecha: {self._fecha} y nota: {self._nota}/10"
+        return f"Se ha añadido la siguiente review al hábito con id {self._habito.identificador}:  fecha: {self._fecha}, nota: {self._nota}/10"
 

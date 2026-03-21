@@ -4,7 +4,8 @@ from Entidades.Rutina import Rutina
 from Entidades.ReviewHabito import Review
 from Persistencia.RepositorioHabito import RepositorioHabito
 from Servicios.ServiciosHabitos import ServiciosHabitos
-
+from Persistencia.RepositorioReviewHabito import RepositorioReviewHabito
+from Servicios.ServiciosReviewHabito import ServiciosReviewHabito
 
 class PantallaHabitos:
 
@@ -12,10 +13,12 @@ class PantallaHabitos:
         self._repo = RepositorioHabito()
         self._servicios = ServiciosHabitos(self._repo)
         self._rutinas = []
+        self._repo_review = RepositorioReviewHabito()
+        self._servicios_review = ServiciosReviewHabito(self._repo_review)
 
     def iniciar(self):
         opcion = ""
-        while opcion != "8":
+        while opcion != "9":
             print("\n---[MENÚ DE HÁBITOS]---")
             print("1. Crear hábito")
             print("2. Ver todos los hábitos")
@@ -24,7 +27,8 @@ class PantallaHabitos:
             print("5. Añadir hábito a rutina")
             print("6. Ver rutinas")
             print("7. Añadir review a hábito")
-            print("8. Salir")
+            print("8. Ver reviews")
+            print("9. Salir")
             opcion = input("Elige una opción: ")
 
             if opcion == "1":
@@ -42,6 +46,8 @@ class PantallaHabitos:
             elif opcion == "7":
                 self.agregar_review()
             elif opcion == "8":
+                self.ver_reviews()
+            elif opcion == "9":
                 print("¡Hasta luego!")
             else:
                 print("Opción no válida.")
@@ -57,14 +63,17 @@ class PantallaHabitos:
         frecuencia = input("Frecuencia (diario/semanal/mensual): ")
         importancia = int(input("Nivel de importancia: "))
 
-        while importancia < 1 or importancia > 5:
+        while importancia < 1 or importancia > 5 or type(importancia) != int:
             print("Error: la importancia debe estar entre 1 y 5")
             importancia = int(input("Nivel de importancia: "))
 
         if tipo == "1":
             habito = HabitoCheck(hab_id, nombre, frecuencia, importancia)
         elif tipo == "2":
-            objetivo = float(input("Objetivo: "))
+            objetivo = int(input("Objetivo: "))
+            while type(objetivo) != int:
+                print("Error: la objetivo debe ser un número entero")
+                objetivo = int(input("Objetivo: "))
             habito = HabitoCantidad(hab_id, nombre, frecuencia, importancia, objetivo)
         else:
             print("Tipo no válido.")
@@ -146,10 +155,33 @@ class PantallaHabitos:
             return
 
         fecha = input("Fecha: ")
-        nota=float(input("Nota: "))
-        comentario= str(input("Commentario: "))
-        review= Review(fecha, nota, comentario)
+
+        #Comprobaciones de tipo de los datos introducidos
+        nota = input("Nota: ")
+        while not nota.isdigit():
+            print("Error: introduce un número entero")
+            nota = input("Nota: ")
+
+        nota = float(nota)
+
+        comentario = input("Comentario: ")
+        while comentario == "":
+            print("Error: el comentario no puede estar vacío")
+            comentario = input("Comentario: ")
+
+        review= Review(fecha, nota, comentario, habito_exito)
+        #Guardamos la review en el hábito
         habito_exito.poner_review(review)
+        self._servicios_review.anadir_review(review)
         print("Review agregada satisfactoriamente.")
 
+    def ver_reviews(self):
+        print("\n---[REVIEWS]---")
+        reviews = self._servicios_review.mostrar_reviews()
+
+        if not reviews:
+            print("No hay reviews todavía.")
+        else:
+            for review in reviews:
+                print(review)
 
