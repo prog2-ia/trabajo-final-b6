@@ -5,10 +5,6 @@ class ServiciosHabitos:
     def __init__(self, repositorio):
         self._repositorio = repositorio
 
-    # Sobrecarga del operador <
-    def __lt__(self, other):
-        return self._importancia < other._importancia
-
     def agregar_habito(self, habito):
         self._repositorio.agregar(habito)
 

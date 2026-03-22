@@ -64,6 +64,10 @@ class Habito(ABC):
     def total(cls):
         return cls.total_habitos
 
+    # Sobrecarga del operador < para comparar por importancia
+    def __lt__(self, other):
+        return self._importancia < other._importancia
+
     # Método abstracto
     @abstractmethod
     def cumplido(self):
