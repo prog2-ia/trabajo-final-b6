@@ -2,47 +2,75 @@
 
 ## Descripción
 
-Un sistema completo de gestión de hábitos desarrollado en Python que permite crear, monitorear y analizar hábitos personales. Implementa principios de Programación Orientada a Objetos (POO) con clases abstractas, herencia, polimorfismo y encapsulamiento.
+El proyecto está dividido en 4 capas para separar responsabilidades y hacer el código más claro y organizado.
 
-## Características
-
-- **Gestión de Hábitos Binarios**: Hábitos que se marcan como completados o no (ej. meditar, hacer ejercicio).
-- **Gestión de Hábitos Medibles**: Hábitos con objetivos cuantitativos (ej. beber 2L de agua, leer 30 páginas).
-- **Ordenación por Importancia**: Los hábitos se listan ordenados de mayor a menor importancia mediante bubble sort.
-- **Agrupación en Rutinas**: Posibilidad de agrupar varios hábitos bajo una misma rutina.
-- **Sistema de Reviews**: Añadir valoraciones con fecha, nota y comentario a cada hábito.
-- **Interfaz de Consola**: Menú interactivo para gestionar todos los elementos del sistema.
-
-## Funcionalidades
- 
-- Crear hábitos de tipo **Check** (sí/no) o **Cantidad** (con objetivo numérico)
-- Asignar un nivel de **importancia** del 1 al 5 a cada hábito
-- Ver todos los hábitos ordenados por importancia
-- Eliminar hábitos
-- Agrupar hábitos en **rutinas**
-- Añadir **reviews** con fecha, nota y comentario a un hábito
+---
 
 ## Estructura del Proyecto
 
 ```
+id="8w1m4o"
 trabajo-final-b6/
+│
 ├── Entidades/
-│   ├── Hábito.py            # Clase abstracta base
-│   ├── HabitoCheck.py       # Hábito de tipo sí/no
-│   ├── HabitoCantidad.py    # Hábito con objetivo numérico
-│   ├── ReviewHabito.py      # Reseña asociada a un hábito
-│   └── Rutina.py            # Agrupación de hábitos
+│   ├── Habito.py
+│   ├── HabitoCheck.py
+│   ├── HabitoCantidad.py
+│   ├── Rutina.py
+│   ├── ReviewHabito.py
+│   └── Notificable.py
+│
 ├── Persistencia/
-│   ├── RepositorioHabito.py       # Almacena hábitos en memoria
-│   └── RepositorioReviewHabito.py # Almacena reviews en memoria
+│   ├── RepositorioHabito.py
+│   └── RepositorioReviewHabito.py
+│
 ├── Servicios/
-│   ├── ServiciosHabitos.py        # Lógica sobre hábitos
-│   └── ServiciosReviewHabito.py   # Lógica sobre reviews
+│   ├── ServiciosHabitos.py
+│   └── ServiciosReviewHabito.py
+│
 ├── UI/
-│   └── PantallaHabitos.py   # Interfaz de consola
-├── main.py                  # Punto de entrada
-├── requirements.txt
-└── README.md
+│   └── PantallaHabitos.py
+│
+├── main.py
+├── README.md
+└── requirements.txt
 
 ```
 
+
+* **Entidades**: contienen las clases principales del sistema (hábitos, rutinas y reviews).
+* **Persistencia**: se encarga de almacenar los datos en memoria mediante repositorios.
+* **Servicios**: incluye la lógica de negocio, actuando como intermediario entre la UI y los datos.
+* **UI**: menú interactivo que permite al usuario utilizar la aplicación desde consola.
+
+---
+
+## Funcionalidades
+
+* Crear hábitos de tipo check (completado o no) o de cantidad (con objetivo).
+* Consultar todos los hábitos y eliminarlos si es necesario.
+* Crear rutinas y agrupar hábitos dentro de ellas.
+* Añadir reviews a los hábitos para valorar su progreso.
+* Consultar las reviews almacenadas en el sistema.
+
+---
+ 
+## Ejecución
+Para ejecutar el programa desde la terminal:
+```bash
+python main.py
+```
+Se mostrará un menú en consola desde el que se pueden usar todas las funcionalidades.
+
+---
+ 
+## Notas
+* Se ha utilizado programación orientada a objetos para modelar el problema.
+* Se aplican conceptos como herencia, encapsulación y clases abstractas.
+* El código está organizado en capas para mejorar su mantenimiento.
+* Se incluyen validaciones básicas para evitar errores en la entrada de datos.
+ 
+---
+ 
+## Estado
+Primera versión funcional del proyecto, con todas las funcionalidades principales implementadas.
