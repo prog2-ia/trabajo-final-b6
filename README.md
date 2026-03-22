@@ -74,34 +74,25 @@ trabajo-final-b6/
  
 ---
 
-## Ejemplo de ejecución senncillo
+## Ejemplo rápido de uso
 
+
+```python
+from Entidades.HabitoCheck import HabitoCheck
+
+habito1 = HabitoCheck("Hacer ejercicio")
+habito2 = HabitoCheck("Leer 20 minutos")
+
+print(habito1)
+print(habito2)
+
+habito1.marcar_completado()
+
+print(habito1)
+print(habito2)
 ```
----[MENÚ DE HÁBITOS]---
-1. Crear hábito
-2. Ver todos los hábitos
-...
-Elige una opción: 1
 
-¿Qué tipo de hábito?
-1. Check (sí/no)
-2. Cantidad (con objetivo)
-Tipo: 2
 
-ID del hábito: H1
-Nombre: Beber agua
-Frecuencia: diario
-Nivel de importancia: 3
-Objetivo: 8
-
-Hábito 'Beber agua' creado correctamente.
-
----[MENÚ DE HÁBITOS]---
-Elige una opción: 2
-
----[HÁBITOS]---
-Cantidad: Beber agua (diario) - 0/8 - En progreso
-```
 ---
 
 ## Diagrama UML de clases (Mermaid)
