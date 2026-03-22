@@ -8,7 +8,10 @@ from Persistencia.RepositorioReviewHabito import RepositorioReviewHabito
 from Servicios.ServiciosReviewHabito import ServiciosReviewHabito
 
 class PantallaHabitos:
-
+    """
+    Pantalla principal del programa,
+    desde aquí el usuario controla el gestor de hábitos mediante distintas opciones
+    """
     def __init__(self):
         self._repo = RepositorioHabito()
         self._servicios = ServiciosHabitos(self._repo)

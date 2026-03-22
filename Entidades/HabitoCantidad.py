@@ -28,9 +28,9 @@ class HabitoCantidad(Habito):
     def notificar(self):
         restante = self._objetivo - self._cantidad_actual
         if restante > 0:
-            print(f"[{self._nombre}] Te faltan {restante} unidades. {self.mensaje_alerta()}")
+            print(f"[{self._nombre}] Te faltan {restante} unidades. ¡Sigue así!")
         else:
-            print(f"[{self._nombre}] ¡Objetivo alcanzado!")
+            print(f"¡Enhorabuena, [{self._nombre}]! ¡Objetivo alcanzado!")
 
     def __str__(self):
         estado = "Cumplido" if self.cumplido() else "En progreso"

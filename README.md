@@ -55,15 +55,6 @@ trabajo-final-b6/
 
 ---
  
-## Ejecución
-Para ejecutar el programa desde la terminal:
-```bash
-python main.py
-```
-Se mostrará un menú en consola desde el que se pueden usar todas las funcionalidades.
-
----
- 
 ## Notas
 * Se ha utilizado programación orientada a objetos para modelar el problema.
 * Se aplican conceptos como herencia, encapsulación y clases abstractas.
@@ -74,3 +65,9 @@ Se mostrará un menú en consola desde el que se pueden usar todas las funcional
  
 ## Estado
 Primera versión funcional del proyecto, con todas las funcionalidades principales implementadas.
+
+---
+
+##Ejemplos de ejecición
+
+
