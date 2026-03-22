@@ -16,11 +16,8 @@ class Review:
 
     @nota.setter
     def nota (self, value):
-        if value<0 or value>10:
-            print(f"El valor de la nota debe estar comprendido entre 0 y 10")
-
-        else:
-            self._nota = float(value)
+        if 0 <= value <= 10:
+            self._nota = int(value)
 
     @property
     def fecha(self):

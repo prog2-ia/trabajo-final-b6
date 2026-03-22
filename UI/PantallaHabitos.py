@@ -112,7 +112,7 @@ class PantallaHabitos:
 
     def habito_a_rutina(self, habito_exito=None):
         nombre= str(input("Introduce el nombre de la rutina: "))
-        ident= input("ID del hábito a añadir")
+        ident= input("ID del hábito a añadir: ")
 
         #Comprobamos si el nombre y el id existen para poder realizar la operación
 
@@ -135,7 +135,7 @@ class PantallaHabitos:
             return
 
         rutina_exito.agregar_habito(habito_exito)
-        print(f"Hábito {habito_exito}  añadido a la rutina {rutina_exito}")
+        print(f"Hábito {habito_exito}  añadido a la rutina {rutina_exito.nombre}")
 
     def ver_rutinas(self):
         print("\n---[RUTINAS]---")
@@ -167,16 +167,19 @@ class PantallaHabitos:
 
         nota = float(nota)
 
+        if nota < 0 or nota > 10:
+            print("La nota debe estar entre 0 y 10")
+            return
+
         comentario = input("Comentario: ")
         while comentario == "":
             print("Error: el comentario no puede estar vacío")
             comentario = input("Comentario: ")
 
-        review= Review(fecha, nota, comentario, habito_exito)
-        #Guardamos la review en el hábito
+        review = Review(fecha, nota, comentario, habito_exito)
         habito_exito.poner_review(review)
         self._servicios_review.anadir_review(review)
-        print("Review agregada satisfactoriamente.")
+        print("Review agregada satisfactoriamente")
 
     def ver_reviews(self):
         print("\n---[REVIEWS]---")
