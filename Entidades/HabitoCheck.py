@@ -7,7 +7,7 @@ class HabitoCheck(Habito, Notificable):
 
     def __init__(self, identificador, nombre, frecuencia, importancia):
         super().__init__(identificador, nombre, frecuencia, importancia)
-        self._completado = False
+        self._completado : bool= False
 
     @property
     def completado(self):
