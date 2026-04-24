@@ -9,7 +9,7 @@ class RepositorioHabito:
     def agregar(self, habito: Habito)->None:
         self._habitos[habito.identificador] = habito
 
-    def eliminar(self, identificador)->bool:
+    def eliminar(self, identificador:int)->bool:
         if identificador in self._habitos:
             del self._habitos[identificador]
             return True

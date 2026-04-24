@@ -5,7 +5,7 @@ class ServiciosHabitos:
     """Operaciones sobre la lista de hábitos del repositorio."""
 
     def __init__(self, repositorio: RepositorioHabito)->None:
-        self._repositorio = repositorio
+        self._repositorio: RepositorioHabito = repositorio
 
     def agregar_habito(self, habito: Habito)->None:
         self._repositorio.agregar(habito)
@@ -16,7 +16,7 @@ class ServiciosHabitos:
     def listar_todos(self)->list[Habito]:
         # Ordenamos los hábitos por importancia
         #Hemos usado la sobrecarga del operador < para simplificar el código de la comparación
-        habitos = self._repositorio.obtener_todos()
+        habitos: list[Habito] = self._repositorio.obtener_todos()
         for i in range(len(habitos)):
             for j in range(i+1,len(habitos)):
                 if habitos[i]<habitos[j]:
@@ -27,7 +27,7 @@ class ServiciosHabitos:
         return habitos
 
     def listar_cumplidos(self) -> list[Habito]:
-        cumplidos= []
+        cumplidos: list[Habito]= []
 
         for h in self._repositorio.obtener_todos():
             if h.cumplido():

@@ -7,7 +7,7 @@ class ServiciosReviewHabito:
     def __init__(self, repositorio: RepositorioReviewHabito) -> None:
         self._repositorio: RepositorioReviewHabito = repositorio
 
-    def anadir_review(self, review)-> None:
+    def anadir_review(self, review: Review)-> None:
         self._repositorio.anadir_review(review)
 
     def mostrar_reviews(self)-> list[Review]:
@@ -28,7 +28,7 @@ class ServiciosReviewHabito:
 
     def buscar_review(self, fecha:str)->list[Review]:
 
-        resultados = []
+        resultados: list[Review] = []
 
         for review in self._repositorio.mostrar_reviews():
             if review.fecha == fecha:
