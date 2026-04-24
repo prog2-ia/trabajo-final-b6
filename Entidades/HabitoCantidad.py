@@ -3,10 +3,10 @@ from Entidades.Habito import Habito
 class HabitoCantidad(Habito):
     """Hábito que se completa al alcanzar una cantidad objetivo."""
 
-    def __init__(self, identificador, nombre, frecuencia, importancia, objetivo):
+    def __init__(self, identificador:int , nombre: str, frecuencia:int, importancia: int,  objetivo:int):
         super().__init__(identificador, nombre, frecuencia, importancia)
-        self._objetivo = objetivo
-        self._cantidad_actual = 0
+        self._objetivo : int = objetivo
+        self._cantidad_actual : int= 0
 
     @property
     def objetivo(self):

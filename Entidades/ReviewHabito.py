@@ -1,10 +1,11 @@
+from Habito import Habito
 class Review:
     """Permite valorar un hábito"""
-    def __init__(self, fecha, nota, comentario, habito):
-        self._fecha = fecha
-        self.nota= nota
-        self.__comentario= comentario #Garantiza privacidad del usuario
-        self._habito = habito
+    def __init__(self, fecha : str, nota : str, comentario: str, habito: Habito):
+        self._fecha : str = fecha
+        self.nota : str= nota
+        self.__comentario : str= comentario #Garantiza privacidad del usuario
+        self._habito : Habito= habito
 
     @property
     def comentario(self):

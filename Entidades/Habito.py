@@ -7,20 +7,20 @@ class Habito(ABC):
     """
     total_habitos = 0
 
-    def __init__(self, identificador, nombre, frecuencia, importancia, fecha=None):
-        self._identificador = identificador
-        self._nombre = nombre
-        self._frecuencia = frecuencia
+    def __init__(self, identificador:int , nombre: str, frecuencia:int, importancia: int, fecha=None):
+        self._identificador : int = identificador
+        self._nombre : str = nombre
+        self._frecuencia : int = frecuencia
         self._activo = True
         # Podríamos usar Habitos.total_habitos y seguiría funcionando, pero si en un futuro separamos HabitoCheck y HabitoCantidad, se quedaría en la clase base
         type(self).total_habitos += 1
-        self._importancia = importancia
+        self._importancia : int = importancia
         if fecha == None:
-            self._fecha = []
+            self._fecha : list = []
         else:
             self._fecha = fecha
 
-        self._reviews= []
+        self._reviews : list= []
 
     #Propiedades (control de acceso)
     @property
