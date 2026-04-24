@@ -1,17 +1,19 @@
+from Entidades.Habito import Habito
+from Persistencia.RepositorioHabito import RepositorioHabito
 
 class ServiciosHabitos:
     """Operaciones sobre la lista de hábitos del repositorio."""
 
-    def __init__(self, repositorio):
+    def __init__(self, repositorio: RepositorioHabito)->None:
         self._repositorio = repositorio
 
-    def agregar_habito(self, habito):
+    def agregar_habito(self, habito: Habito)->None:
         self._repositorio.agregar(habito)
 
-    def eliminar_habito(self, identificador):
+    def eliminar_habito(self, identificador:int)->bool:
         return self._repositorio.eliminar(identificador)
 
-    def listar_todos(self):
+    def listar_todos(self)->list[Habito]:
         # Ordenamos los hábitos por importancia
         #Hemos usado la sobrecarga del operador < para simplificar el código de la comparación
         habitos = self._repositorio.obtener_todos()
@@ -24,7 +26,7 @@ class ServiciosHabitos:
 
         return habitos
 
-    def listar_cumplidos(self):
+    def listar_cumplidos(self) -> list[Habito]:
         cumplidos= []
 
         for h in self._repositorio.obtener_todos():
@@ -33,8 +35,8 @@ class ServiciosHabitos:
 
         return cumplidos
 
-    def resumen(self):
-        habitos = self._repositorio.obtener_todos()
-        total = len(habitos)
-        cumplidos = sum(1 for h in habitos if h.cumplido())
+    def resumen(self) -> tuple[int,int]:
+        habitos: list[Habito] = self._repositorio.obtener_todos()
+        total: int = len(habitos)
+        cumplidos: int = sum(1 for h in habitos if h.cumplido())
         return total, cumplidos
