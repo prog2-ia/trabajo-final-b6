@@ -2,6 +2,13 @@ from Entidades.Habito import Habito
 class Rutina:
     """Agrupa varios hábitos bajo un mismo nombre."""
 
+    def __init__(self, nombre: str) -> None:
+        if not nombre or nombre.strip() == "":
+            raise ValueError("El nombre de la rutina no puede estar vacío")
+
+        self._nombre : str = nombre
+        self._habitos: list[Habito] = []
+
     @property
     def nombre(self) -> str:
         return self._nombre
@@ -10,14 +17,33 @@ class Rutina:
     def habitos(self) -> list[Habito]:
         return self._habitos
 
-    def __init__(self, nombre: str) -> None:
-        self._nombre : str = nombre
-        self._habitos: list[Habito] = []
-
     def agregar_habito(self, habito: Habito) -> None:
+        if habito in self._habitos:
+            raise HabitoDuplicadoError(f"El hábito '{habito.nombre}' ya está en la rutina")
         self._habitos.append(habito)
 
     def resumen(self) -> None:
-        print(f"\nRutina: {self._nombre}")
-        for h in self._habitos:
-            print(f"  {h}")
+        if len(self._habitos) == 0:
+            raise RutinaVaciaError("La rutina está vacía")
+
+        print(f"Rutina: {self._nombre}")
+
+        for habito in self._habitos:
+            print(habito)
+
+
+class HabitoDuplicadoError(Exception):
+    pass
+
+class HabitoNoEncontradoError(Exception):
+    pass
+
+class RutinaVaciaError(Exception):
+    pass
+
+class LimiteHabitosError(Exception):
+    pass
+
+class HabitoInactivoError(Exception):
+    pass
+
