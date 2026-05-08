@@ -10,12 +10,12 @@ class Habito(ABC):
 
     def __init__(self, identificador:int , nombre: str, frecuencia:str, importancia: int, fecha: list[str] | None = None) -> None:
         self._identificador : int = identificador
-        self._nombre : str = nombre
-        self._frecuencia : str = frecuencia
+        self.nombre : str = nombre
+        self.frecuencia : str = frecuencia
         self._activo: bool = True
         # Podríamos usar Habitos.total_habitos y seguiría funcionando, pero si en un futuro separamos HabitoCheck y HabitoCantidad, se quedaría en la clase base
         type(self).total_habitos += 1
-        self._importancia : int = importancia
+        self.importancia : int = importancia
 
         if fecha == None:
             self._fecha : list[str] = []
@@ -31,10 +31,15 @@ class Habito(ABC):
 
     @importancia.setter
     def importancia(self, value:int) -> None:
+
+        if not isinstance(value, int):
+            raise TypeError("La importancia debe ser un número entero")
+
         if value < 1 or value > 5:
-            print("El valor de importancia debe estar entre el 1 y 5")
-        else:
-            self._importancia = value
+            raise ValueError("El valor de importancia debe estar entre el 1 y 5")
+
+        self._importancia = value
+
     @property
     def identificador(self) -> int:
         return self._identificador
@@ -43,9 +48,29 @@ class Habito(ABC):
     def nombre(self) -> str:
         return self._nombre
 
+    @nombre.setter
+    def nombre(self, value:str) -> None:
+        if not isinstance(value, str):
+            raise TypeError("El nombre del hábito debe ser de tipo str")
+
+        if value=="":
+            raise ValueError("El nombre del hábito no puede estar vacía")
+
+        self._nombre = value
+
     @property
     def frecuencia(self) -> str:
         return self._frecuencia
+
+    @frecuencia.setter
+    def frecuencia(self, value:str) -> None:
+        if not isinstance(value, str):
+            raise TypeError("La frecuencia debe ser de tipo str")
+
+        if value not in ("diario", "semanal", "mensual"):
+            raise ValueError("La frecuencia debe ser una de las siguientes opciones: diario, semanal o mensual")
+
+        self._frecuencia = value
 
     @property
     def activo(self) -> bool:

@@ -7,11 +7,19 @@ class HabitoCheck(Habito, Notificable):
 
     def __init__(self,identificador: int,nombre: str,frecuencia: str,importancia: int) -> None:
         super().__init__(identificador, nombre, frecuencia, importancia)
-        self._completado : bool= False
+        self.completado : bool= False
 
     @property
     def completado(self) -> bool:
         return self._completado
+
+    @completado.setter
+    def completado(self, value: bool) -> None:
+
+        if not isinstance(value, bool):
+            raise TypeError("El estado completado debe ser booleano")
+
+        self._completado = value
 
     def marcar_completado(self) -> None:
         self._completado = True
