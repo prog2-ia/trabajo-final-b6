@@ -4,12 +4,22 @@ class ServiciosHabitos:
     """Operaciones sobre la lista de hábitos del repositorio."""
 
     def __init__(self, repositorio: RepositorioHabito)->None:
+        if not isinstance(repositorio, RepositorioHabito):
+            raise TypeError("El repositorio debe ser de tipo RepositorioHabito")
+
         self._repositorio: RepositorioHabito = repositorio
 
     def agregar_habito(self, habito: Habito)->None:
+        if not isinstance(habito, Habito):
+            raise TypeError("Solo se pueden agregar objetos de tipo Habito")
+
         self._repositorio.agregar(habito)
 
     def eliminar_habito(self, identificador:int)->bool:
+
+        if not isinstance(identificador, int):
+            raise TypeError("El identificador debe ser un número entero")
+
         return self._repositorio.eliminar(identificador)
 
     def listar_todos(self)->list[Habito]:
@@ -38,4 +48,5 @@ class ServiciosHabitos:
         habitos: list[Habito] = self._repositorio.obtener_todos()
         total: int = len(habitos)
         cumplidos: int = sum(1 for h in habitos if h.cumplido())
+
         return total, cumplidos
