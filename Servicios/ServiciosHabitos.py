@@ -1,6 +1,5 @@
 from Entidades.Habito import Habito
 from Persistencia.RepositorioHabito import RepositorioHabito
-
 class ServiciosHabitos:
     """Operaciones sobre la lista de hábitos del repositorio."""
 
