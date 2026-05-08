@@ -1,7 +1,7 @@
 class Notificable:
     """Clase que se aplica a quelas que pueden genera notificaciones"""
-    def notificar(self):
-        return NotImplementedError
+    def notificar(self) -> None:
+        return
 
-    def mensaje_alerta(self):
+    def mensaje_alerta(self) -> str:
         return "¡Recuerda completar tu hábito!"
