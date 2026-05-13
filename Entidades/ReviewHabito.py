@@ -53,9 +53,6 @@ class NotaInvalidaError(Exception):
 class ComentarioVacioError(Exception):
     pass
 
-class ReviewDuplicadaError(Exception):
-    pass
-
 class FechaReviewInvalidaError(Exception):
     pass
 

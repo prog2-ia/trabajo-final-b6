@@ -35,15 +35,5 @@ class Rutina:
 class HabitoDuplicadoError(Exception):
     pass
 
-class HabitoNoEncontradoError(Exception):
-    pass
-
 class RutinaVaciaError(Exception):
     pass
-
-class LimiteHabitosError(Exception):
-    pass
-
-class HabitoInactivoError(Exception):
-    pass
-

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from Entidades.ReviewHabito import Review
 
 class Habito(ABC):
     """
@@ -78,7 +78,7 @@ class Habito(ABC):
 
     #Métodos de instancia
 
-    def poner_review(self, review:Any) -> None:
+    def poner_review(self, review:Review) -> None:
         self._reviews.append(review)
 
     def activar(self) -> None:

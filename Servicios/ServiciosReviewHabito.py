@@ -47,7 +47,7 @@ class ServiciosReviewHabito:
 
         return resultados
 
-    def review_por_nota(self, nota:float)->list[Review]:
+    def review_por_nota(self, nota:int|float)->list[Review]:
         if not isinstance(nota, (int, float)):
             raise TypeError("La nota debe ser numérica")
 

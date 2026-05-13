@@ -7,6 +7,7 @@ from Persistencia.RepositorioHabito import RepositorioHabito
 from Servicios.ServiciosHabitos import ServiciosHabitos
 from Persistencia.RepositorioReviewHabito import RepositorioReviewHabito
 from Servicios.ServiciosReviewHabito import ServiciosReviewHabito
+from UI.Excepciones import *
 
 class PantallaHabitos:
     """
@@ -63,22 +64,32 @@ class PantallaHabitos:
         print("2. Cantidad (con objetivo)")
         tipo = input("Tipo: ")
 
-        hab_id = int(input("ID del hábito: "))
+        try:
+            hab_id = int(input("ID del hábito: "))
+        except ValorInvalidoError:
+            print("Debes introducir un número válido")
+            return
         nombre = input("Nombre: ")
         frecuencia = input("Frecuencia (diario/semanal/mensual): ")
-        importancia = int(input("Nivel de importancia: "))
 
-        while importancia < 1 or importancia > 5 or type(importancia) != int:
-            print("Error: la importancia debe estar entre 1 y 5")
+        try:
             importancia = int(input("Nivel de importancia: "))
+            if importancia < 1 or importancia > 5:
+                print("El número debe ser mayor que 1 y menor que 5")
+                return
+        except ValueError:
+            print("Debes introducir un número válido")
+            return
 
         if tipo == "1":
             habito = HabitoCheck(hab_id, nombre, frecuencia, importancia)
         elif tipo == "2":
-            objetivo = int(input("Objetivo: "))
-            while type(objetivo) != int:
-                print("Error: la objetivo debe ser un número entero")
+            try:
                 objetivo = int(input("Objetivo: "))
+            except ValorInvalidoError:
+                print("Error: el objetivo debe ser un número entero")
+                return
+
             habito = HabitoCantidad(hab_id, nombre, frecuencia, importancia, objetivo)
         else:
             print("Tipo no válido.")
@@ -97,7 +108,12 @@ class PantallaHabitos:
                 print(habito)
 
     def eliminar_habito(self)->None:
-        hab_id = int(input("ID del hábito a eliminar: "))
+        try:
+            hab_id = int(input("ID del hábito a eliminar: "))
+        except ValorInvalidoError:
+            print("Debes introducir un número válido")
+            return
+
         exito = self._servicios.eliminar_habito(hab_id)
 
         if exito:
@@ -114,8 +130,11 @@ class PantallaHabitos:
 
     def habito_a_rutina(self)->None:
         nombre= str(input("Introduce el nombre de la rutina: "))
-        ident= int(input("ID del hábito a añadir: "))
-
+        try:
+            ident = int(input("ID del hábito a añadir: "))
+        except ValorInvalidoError:
+            print("Debes introducir un número válido")
+            return
         #Comprobamos si el nombre y el id existen para poder realizar la operación
 
         rutina_exito= None
@@ -127,10 +146,7 @@ class PantallaHabitos:
             print("No existe esa rutina")
             return
 
-        habito_exito= None
-        for habito in self._repo.obtener_todos():
-            if habito.identificador == ident:
-                habito_exito = habito
+        habito_exito=self._repo.obtener(ident)
 
         if habito_exito== None:
             print("No existe ese habito")
@@ -149,11 +165,13 @@ class PantallaHabitos:
 
     #Buscamos un hábito por su ID para asociarle una review
     def agregar_review(self)->None:
-        ident= int(input("ID del hábito: "))
-        habito_exito = None
-        for habito in self._repo.obtener_todos():
-            if habito.identificador == ident:
-                habito_exito = habito
+        try:
+            ident = int(input("ID del hábito a añadir: "))
+        except ValorInvalidoError:
+            print("Debes introducir un número válido")
+            return
+
+        habito_exito = self._repo.obtener(ident)
 
         if habito_exito == None:
             print("No existe el habito")
@@ -162,12 +180,11 @@ class PantallaHabitos:
         fecha = input("Fecha: ")
 
         #Comprobaciones de tipo de los datos introducidos
-        nota_texto = input("Nota: ")
-        while not nota_texto.isdigit():
-            print("Error: introduce un número entero")
-            nota_texto = input("Nota: ")
-
-        nota = float(nota_texto)
+        try:
+            nota = float(input("Nota: "))
+        except ValorInvalidoError:
+            print("Introduce un número válido")
+            return
 
         if nota < 0 or nota > 10:
             print("La nota debe estar entre 0 y 10")
