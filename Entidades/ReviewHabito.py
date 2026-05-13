@@ -1,7 +1,7 @@
 from Entidades.Habito import Habito
 class Review:
     """Permite valorar un hábito"""
-    def __init__(self, fecha : str, nota : int, comentario: str, habito: Habito) -> None:
+    def __init__(self, fecha : str, nota : float, comentario: str, habito: Habito) -> None:
 
         # Validación de comentario vacío
         if not comentario or comentario.strip() == "":
@@ -16,7 +16,7 @@ class Review:
             raise FechaReviewInvalidaError("La fecha no puede estar vacía")
 
         self._fecha : str = fecha
-        self.nota : int= nota
+        self.nota : float= nota
         self.__comentario : str= comentario #Garantiza privacidad del usuario
         self._habito : Habito= habito
 

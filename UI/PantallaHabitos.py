@@ -142,13 +142,13 @@ class PantallaHabitos:
             if rutina.nombre == nombre:
                 rutina_exito = rutina
 
-        if rutina_exito == None:
+        if rutina_exito is None:
             print("No existe esa rutina")
             return
 
         habito_exito=self._repo.obtener(ident)
 
-        if habito_exito== None:
+        if habito_exito is None:
             print("No existe ese habito")
             return
 
@@ -173,7 +173,7 @@ class PantallaHabitos:
 
         habito_exito = self._repo.obtener(ident)
 
-        if habito_exito == None:
+        if habito_exito is None:
             print("No existe el habito")
             return
 
