@@ -1,4 +1,5 @@
 from Entidades.Habito import Habito
+from UI.Excepciones import ErrorHabitos
 class Review:
     """Permite valorar un hábito"""
     def __init__(self, fecha : str, nota : float, comentario: str, habito: Habito) -> None:
@@ -47,12 +48,12 @@ class Review:
         return f"Se ha añadido la siguiente review al hábito con id {self._habito.identificador}:  fecha: {self._fecha}, nota: {self.nota}/10"
 
 
-class NotaInvalidaError(Exception):
+class NotaInvalidaError(ErrorHabitos):
     pass
 
-class ComentarioVacioError(Exception):
+class ComentarioVacioError(ErrorHabitos):
     pass
 
-class FechaReviewInvalidaError(Exception):
+class FechaReviewInvalidaError(ErrorHabitos):
     pass
 

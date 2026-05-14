@@ -1,4 +1,5 @@
 from Entidades.Habito import Habito
+from UI.Excepciones import ErrorHabitoDuplicado
 import os
 
 class RepositorioHabito:
@@ -48,7 +49,7 @@ class RepositorioHabito:
             raise TypeError("Solo se pueden almacenar objetos del tipo Habito")
 
         if habito.identificador in self._habitos:
-            raise KeyError(f"Ya existe un hábito con el identificador {habito.identificador}")
+            raise ErrorHabitoDuplicado(f"Ya existe un hábito con el identificador {habito.identificador}")
 
         self._habitos[habito.identificador] = habito
         self._guardar()

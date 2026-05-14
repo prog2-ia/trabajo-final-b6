@@ -66,7 +66,7 @@ class PantallaHabitos:
 
         try:
             hab_id = int(input("ID del hábito: "))
-        except ValorInvalidoError:
+        except ValueError:
             print("Debes introducir un número válido")
             return
         nombre = input("Nombre: ")
@@ -86,7 +86,7 @@ class PantallaHabitos:
         elif tipo == "2":
             try:
                 objetivo = int(input("Objetivo: "))
-            except ValorInvalidoError:
+            except ValueError:
                 print("Error: el objetivo debe ser un número entero")
                 return
 
@@ -110,7 +110,7 @@ class PantallaHabitos:
     def eliminar_habito(self)->None:
         try:
             hab_id = int(input("ID del hábito a eliminar: "))
-        except ValorInvalidoError:
+        except ValueError:
             print("Debes introducir un número válido")
             return
 
@@ -132,7 +132,7 @@ class PantallaHabitos:
         nombre= str(input("Introduce el nombre de la rutina: "))
         try:
             ident = int(input("ID del hábito a añadir: "))
-        except ValorInvalidoError:
+        except ValueError:
             print("Debes introducir un número válido")
             return
         #Comprobamos si el nombre y el id existen para poder realizar la operación
@@ -142,13 +142,13 @@ class PantallaHabitos:
             if rutina.nombre == nombre:
                 rutina_exito = rutina
 
-        if rutina_exito is None:
+        if rutina_exito == None:
             print("No existe esa rutina")
             return
 
         habito_exito=self._repo.obtener(ident)
 
-        if habito_exito is None:
+        if habito_exito== None:
             print("No existe ese habito")
             return
 
@@ -167,13 +167,13 @@ class PantallaHabitos:
     def agregar_review(self)->None:
         try:
             ident = int(input("ID del hábito a añadir: "))
-        except ValorInvalidoError:
+        except ValueError:
             print("Debes introducir un número válido")
             return
 
         habito_exito = self._repo.obtener(ident)
 
-        if habito_exito is None:
+        if habito_exito == None:
             print("No existe el habito")
             return
 
@@ -182,7 +182,7 @@ class PantallaHabitos:
         #Comprobaciones de tipo de los datos introducidos
         try:
             nota = float(input("Nota: "))
-        except ValorInvalidoError:
+        except ValueError:
             print("Introduce un número válido")
             return
 

@@ -10,7 +10,7 @@ class Notificable:
 
         print(mensaje)
 
-
+    @staticmethod
     def mensaje_alerta(self) -> str:
         return "¡Recuerda completar tu hábito!"
 

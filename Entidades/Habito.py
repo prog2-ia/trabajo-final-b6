@@ -17,7 +17,7 @@ class Habito(ABC):
         type(self).total_habitos += 1
         self.importancia : int = importancia
 
-        if fecha == None:
+        if fecha is None:
             self._fecha : list[str] = []
         else:
             self._fecha  = fecha
@@ -99,3 +99,6 @@ class Habito(ABC):
     @abstractmethod
     def cumplido(self) -> bool:
         pass
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self._identificador}, '{self._nombre}', '{self._frecuencia}', {self._importancia})"

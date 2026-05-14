@@ -53,3 +53,6 @@ class HabitoCantidad(Habito):
     def __str__(self) -> str:
         estado = "Cumplido" if self.cumplido() else "En progreso"
         return f"Cantidad: {self._nombre} ({self._frecuencia}) - {self._cantidad_actual}/{self._objetivo} - {estado}"
+
+    def __repr__(self) -> str:
+        return f"HabitoCantidad({self._identificador}, '{self._nombre}', '{self._frecuencia}', {self._importancia}, {self._objetivo})"

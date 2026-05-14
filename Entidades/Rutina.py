@@ -1,4 +1,5 @@
 from Entidades.Habito import Habito
+from UI.Excepciones import ErrorHabitos
 class Rutina:
     """Agrupa varios hábitos bajo un mismo nombre."""
 
@@ -32,8 +33,8 @@ class Rutina:
             print(habito)
 
 
-class HabitoDuplicadoError(Exception):
+class HabitoDuplicadoError(ErrorHabitos):
     pass
 
-class RutinaVaciaError(Exception):
+class RutinaVaciaError(ErrorHabitos):
     pass
