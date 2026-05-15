@@ -16,6 +16,7 @@ class Rutina:
 
     @property
     def habitos(self) -> list[Habito]:
+        #Se devuelve una copia para que la lista interna no pueda modificarse desde fuera
         return self._habitos
 
     def agregar_habito(self, habito: Habito) -> None:
@@ -30,6 +31,7 @@ class Rutina:
         print(f"Rutina: {self._nombre}")
 
         for habito in self._habitos:
+            #Cada hábito genera su propio __str__ según su tipo
             print(habito)
 
 

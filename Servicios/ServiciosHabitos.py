@@ -47,6 +47,7 @@ class ServiciosHabitos:
     def resumen(self) -> tuple[int,int]:
         habitos: list[Habito] = self._repositorio.obtener_todos()
         total: int = len(habitos)
+        #Se llama a cumplido() y cada tipo de habito lo calcula de distitna manera
         cumplidos: int = sum(1 for h in habitos if h.cumplido())
 
         return total, cumplidos
