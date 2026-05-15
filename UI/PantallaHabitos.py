@@ -62,41 +62,77 @@ class PantallaHabitos:
         print("\n¿Qué tipo de hábito?")
         print("1. Check (sí/no)")
         print("2. Cantidad (con objetivo)")
-        tipo = input("Tipo: ")
 
-        try:
-            hab_id = int(input("ID del hábito: "))
-        except ValueError:
-            print("Debes introducir un número válido")
-            return
-        nombre = input("Nombre: ")
-        frecuencia = input("Frecuencia (diario/semanal/mensual): ")
-
-        try:
-            importancia = int(input("Nivel de importancia: "))
-            if importancia < 1 or importancia > 5:
-                print("El número debe ser mayor que 1 y menor que 5")
-                return
-        except ValueError:
-            print("Debes introducir un número válido")
-            return
-
-        if tipo == "1":
-            habito = HabitoCheck(hab_id, nombre, frecuencia, importancia)
-        elif tipo == "2":
+        while True:
             try:
-                objetivo = int(input("Objetivo: "))
+                tipo = int(input("Tipo: "))
+                if tipo in [1, 2]:
+                    break
+                else:
+                    print("Dato erróneo: debe ser 1 o 2. Intenta de nuevo.")
             except ValueError:
-                print("Error: el objetivo debe ser un número entero")
-                return
+                print("Dato erróneo: debe ser un número")
+
+        while True:
+            id_str = input("ID del hábito (número entero positivo): ")
+            if not id_str.isdigit():
+                print("Error: El ID debe ser un número entero positivo. Intenta de nuevo.")
+                continue
+            hab_id = int(id_str)
+            if self._servicios._repositorio.obtener(hab_id) is not None:
+                print(f"Error: Ya existe un hábito con el ID {hab_id}. Usa otro ID.")
+                continue
+            break
+
+
+
+        nombre = input("Nombre: ")
+
+        while True:
+            frecuencia = input("Frecuencia (diario/semanal/mensual): ").strip().lower()
+            if frecuencia in ['diario', 'semanal', 'mensual']:
+                break
+            else:
+                print("Error: La frecuencia debe de ser 'diario', 'semanal' o 'mensual'.")
+
+        while True:
+            importancia_str = input("Nivel de importancia: ")
+            if not importancia_str.isdigit():
+                print("Error: Debes introducir un número entre 1 y 5. Intenta de nuevo.")
+                continue
+            importancia = int(importancia_str)
+            if 1 <= importancia <= 5:
+                break
+            else:
+                print("Error: La importancia debe ser un número entre 1 y 5. Intenta de nuevo.")
+
+
+        if tipo == 1:
+            habito = HabitoCheck(hab_id, nombre, frecuencia, importancia)
+            self._servicios.agregar_habito(habito)
+            print(f"Hábito '{nombre}' creado correctamente.")
+
+        elif tipo == "2":
+            while True:
+                obj_str = input("Objetivo: ")
+                if not obj_str.isdigit():
+                    print("Error: Debes introducir un número válido.")
+                    continue
+                objetivo = int(obj_str)
+                if objetivo > 0:
+                    break
+                else:
+                    print("Error: El objetivo debe ser mayor que 0.")
 
             habito = HabitoCantidad(hab_id, nombre, frecuencia, importancia, objetivo)
+            self._servicios.agregar_habito(habito)
+            print(f"Hábito '{nombre}' creado correctamente.")
+
         else:
             print("Tipo no válido.")
             return
 
-        self._servicios.agregar_habito(habito)
-        print(f"Hábito '{nombre}' creado correctamente.")
+
 
     def ver_habitos(self)->None:
         print("\n---[HÁBITOS]---")
