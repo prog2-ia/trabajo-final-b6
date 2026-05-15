@@ -84,7 +84,7 @@ class Habito(ABC):
 
     #Métodos de instancia
 
-    def poner_review(self, review:Review) -> None:
+    def poner_review(self, review) -> None:
         from Entidades.ReviewHabito import Review
 
         if not isinstance(review, Review):
