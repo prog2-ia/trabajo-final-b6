@@ -112,7 +112,7 @@ class PantallaHabitos:
             self._servicios.agregar_habito(habito)
             print(f"Hábito '{nombre}' creado correctamente.")
 
-        elif tipo == "2":
+        elif tipo == 2:
             while True:
                 obj_str = input("Objetivo: ")
                 if not obj_str.isdigit():
@@ -133,7 +133,6 @@ class PantallaHabitos:
             return
 
 
-
     def ver_habitos(self)->None:
         print("\n---[HÁBITOS]---")
         habitos:list[Habito] = self._servicios.listar_todos()
@@ -144,11 +143,12 @@ class PantallaHabitos:
                 print(habito)
 
     def eliminar_habito(self)->None:
-        try:
-            hab_id = int(input("ID del hábito a eliminar: "))
-        except ValueError:
-            print("Debes introducir un número válido")
-            return
+        while True:
+            try:
+                hab_id = int(input("ID del hábito a eliminar: "))
+                break
+            except ValueError:
+                print("Debes introducir un número válido")
 
         exito = self._servicios.eliminar_habito(hab_id)
 
@@ -159,37 +159,53 @@ class PantallaHabitos:
             print("Error: el ID introducido no se corresponde con ningún hábito")
 
     def crear_rutina(self)->None:
-        nombre= str(input("Introduce el nombre de la rutina: "))
+        while True:
+            nombre= str(input("Introduce el nombre de la rutina: "))
+            if nombre:
+                break
+            else:
+                print('Error: El nombre no puede estar vacío')
+
         rutina = Rutina(nombre)
         self._rutinas.append(rutina)
         print(f"Rutina {nombre} creada satisfactoriamente.")
 
     def habito_a_rutina(self)->None:
-        nombre= str(input("Introduce el nombre de la rutina: "))
-        try:
-            ident = int(input("ID del hábito a añadir: "))
-        except ValueError:
-            print("Debes introducir un número válido")
-            return
-        #Comprobamos si el nombre y el id existen para poder realizar la operación
+
+        while True:
+            nombre= str(input("Introduce el nombre de la rutina: "))
+            if nombre:
+                break
+            else:
+                print('Error: El nombre no puede estar vacío')
+        while True:
+            try:
+                ident = int(input("ID del hábito a añadir: "))
+                break
+            except ValueError:
+                print("Debes introducir un número válido")
+            #Comprobamos si el nombre y el id existen para poder realizar la operación
 
         rutina_exito= None
         for rutina in self._rutinas:
             if rutina.nombre == nombre:
                 rutina_exito = rutina
 
-        if rutina_exito == None:
+        if rutina_exito is None:
             print("No existe esa rutina")
             return
 
         habito_exito=self._repo.obtener(ident)
 
-        if habito_exito== None:
+        if habito_exito is None:
             print("No existe ese habito")
             return
 
-        rutina_exito.agregar_habito(habito_exito)
-        print(f"Hábito {habito_exito}  añadido a la rutina {rutina_exito.nombre}")
+        try:
+            rutina_exito.agregar_habito(habito_exito)
+            print(f"Hábito '{habito_exito.nombre}' añadido a la rutina '{rutina_exito.nombre}'")
+        except Exception as e:
+            print(f"Error: {e}")
 
     def ver_rutinas(self)->None:
         print("\n---[RUTINAS]---")
@@ -197,44 +213,58 @@ class PantallaHabitos:
             print("No hay rutinas")
         else:
             for rutina in self._rutinas:
-                rutina.resumen()
+                try:
+                    rutina.resumen()
+                except Exception as e:
+                    print(f"Error al mostrar la rutina '{rutina.nombre}': {e}")
 
     #Buscamos un hábito por su ID para asociarle una review
     def agregar_review(self)->None:
-        try:
-            ident = int(input("ID del hábito a añadir: "))
-        except ValueError:
-            print("Debes introducir un número válido")
-            return
+        while True:
+            try:
+                ident = int(input("ID del hábito a añadir: "))
+                break
+            except ValueError:
+                print("Debes introducir un número válido")
 
         habito_exito = self._repo.obtener(ident)
 
-        if habito_exito == None:
+        if habito_exito is None:
             print("No existe el habito")
             return
 
-        fecha = input("Fecha: ")
+        while True:
+            fecha = input("Fecha (ej: 2024-01-15): ").strip()
+            if fecha:
+                break
+            else:
+                print("Error: La fecha no puede estar vacía. Intenta de nuevo.")
 
         #Comprobaciones de tipo de los datos introducidos
+        while True:
+            try:
+                nota = float(input("Nota: "))
+                if 0<= nota <=10:
+                    break
+                else:
+                    print('Error: La nota debe de estar entre 0 y 10')
+            except ValueError:
+                print("Introduce un número válido")
+
+        while True:
+            comentario = input("Comentario: ").strip()
+            if comentario:
+                break
+            else:
+                print("Error: El comentario no puede estar vacío. Intenta de nuevo.")
+
         try:
-            nota = float(input("Nota: "))
-        except ValueError:
-            print("Introduce un número válido")
-            return
-
-        if nota < 0 or nota > 10:
-            print("La nota debe estar entre 0 y 10")
-            return
-
-        comentario = input("Comentario: ")
-        while comentario == "":
-            print("Error: el comentario no puede estar vacío")
-            comentario = input("Comentario: ")
-
-        review = Review(fecha, nota, comentario, habito_exito)
-        habito_exito.poner_review(review)
-        self._servicios_review.anadir_review(review)
-        print("Review agregada satisfactoriamente")
+            review = Review(fecha, nota, comentario, habito_exito)
+            habito_exito.poner_review(review)
+            self._servicios_review.anadir_review(review)
+            print("Review agregada satisfactoriamente")
+        except Exception as e:
+            print(f"Error al crear la review: {e}")
 
     def ver_reviews(self)->None:
         print("\n---[REVIEWS]---")
