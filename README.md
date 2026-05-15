@@ -1,26 +1,61 @@
 # Sistema de Gestión de Hábitos
 
-Aplicación de consola para gestionar hábitos, rutinas y valoraciones, con separación por capas (`entidades`, `servicios`, `persistencia`, `ui`).
+Aplicación de consola para gestionar hábitos, rutinas y valoraciones, con separación por capas (`Entidades`, `Servicios`, `Persistencia`, `UI`) y uso de Programación Orientada a Objetos.
 
 ---
 
-## Objetivo del proyecto
+# Objetivo del proyecto
 
-Este proyecto implementa un sistema de gestión de hábitos con foco en:
+Este proyecto implementa un sistema académico de gestión de hábitos y bienestar con foco en:
 
-- modelado orientado a objetos y encapsulación  
-- uso de herencia (clase abstracta `Habito` y sus variantes)  
-- polimorfismo en métodos como `cumplido()` y `notificar()`  
-- separación de responsabilidades mediante arquitectura en 4 capas  
-- gestión de datos mediante repositorios en memoria  
-- interacción con el usuario a través de una interfaz de consola  
+- modelado orientado a objetos y encapsulación
+- uso de herencia mediante la clase abstracta `Habito` y sus variantes
+- polimorfismo en métodos como `cumplido()` y `notificar()`
+- separación de responsabilidades mediante arquitectura en 4 capas
+- validación de datos y gestión de excepciones propias
+- uso de repositorios para gestionar los datos de la aplicación
+- interacción con el usuario mediante una interfaz de consola
+
+El proyecto se basa en la propuesta 21, **Hábitos y bienestar**, cuyo objetivo es realizar un seguimiento de rutinas, metas y tipos de hábitos con reglas diferenciadas.
 
 ---
 
-## Estructura del Proyecto
+# Requisitos
 
+- Python 3.12 o superior
+- Entorno virtual recomendado
+
+---
+
+# Instalación rápida
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
 ```
 
+Si existe el archivo `requirements.txt`, se pueden instalar las dependencias con:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+---
+
+# Cómo ejecutar la aplicación
+
+```bash
+python main.py
+```
+
+`main.py` construye los repositorios, servicios y lanza la interfaz de consola definida en `UI/PantallaHabitos.py`.
+
+---
+
+# Estructura del proyecto
+
+```text
 trabajo-final-b6/
 │
 ├── Entidades/
@@ -45,111 +80,427 @@ trabajo-final-b6/
 ├── main.py
 ├── README.md
 └── requirements.txt
-
 ```
 
+---
 
-* **Entidades**: contienen las clases principales del sistema (hábitos, rutinas y reviews).
-* **Persistencia**: se encarga de almacenar los datos en memoria mediante repositorios.
-* **Servicios**: incluye la lógica de negocio, actuando como intermediario entre la UI y los datos.
-* **UI**: menú interactivo que permite al usuario utilizar la aplicación desde consola.
+# Responsabilidades por capa
+
+Regla arquitectónica principal:
+
+```text
+UI -> Servicios -> Persistencia / Entidades
+```
+
+## Entidades
+
+Contienen las clases principales del dominio:
+
+- hábitos
+- rutinas
+- reviews
+- validaciones internas
+- herencia
+- polimorfismo
+- encapsulación
+
+## Servicios
+
+Actúan como intermediarios entre la interfaz y los datos. Incluyen la lógica de aplicación para:
+
+- crear hábitos
+- listar hábitos
+- eliminar hábitos
+- gestionar reviews
+- calcular información derivada
+
+## Persistencia
+
+Contiene los repositorios encargados de almacenar y recuperar los objetos de la aplicación.
+
+Actualmente, se utilizan repositorios en memoria, dejando la estructura preparada para añadir persistencia en ficheros.
+
+## UI
+
+Contiene la interfaz de consola. Su responsabilidad es pedir datos al usuario, mostrar mensajes y llamar a los servicios correspondientes.
 
 ---
 
-## Funcionalidades
+# Funcionalidades
 
-* Crear hábitos de tipo check (completado o no) o de cantidad (con objetivo).
-* Consultar todos los hábitos y eliminarlos si es necesario.
-* Crear rutinas y agrupar hábitos dentro de ellas.
-* Añadir reviews a los hábitos para valorar su progreso.
-* Consultar las reviews almacenadas en el sistema.
+La aplicación permite:
+
+- crear hábitos de tipo check
+- crear hábitos de tipo cantidad
+- consultar todos los hábitos registrados
+- eliminar hábitos
+- crear rutinas y agrupar hábitos
+- añadir reviews a los hábitos
+- consultar las reviews almacenadas
+- activar y pausar hábitos
+- comprobar el cumplimiento de un hábito
 
 ---
- 
-## Notas
-* Se ha utilizado programación orientada a objetos para modelar el problema.
-* Se aplican conceptos como herencia, encapsulación y clases abstractas.
-* El código está organizado en capas para mejorar su mantenimiento.
-* Se incluyen validaciones básicas para evitar errores en la entrada de datos.
- 
+
+# Reglas de dominio principales
+
+- `Habito` es una clase abstracta que define la estructura común de todos los hábitos.
+- `HabitoCheck` representa hábitos que se cumplen o no se cumplen.
+- `HabitoCantidad` representa hábitos con un objetivo numérico.
+- `Rutina` permite agrupar varios hábitos.
+- `Review` permite valorar un hábito con fecha, nota y comentario.
+- La importancia de un hábito debe estar entre 1 y 5.
+- La frecuencia solo puede ser `diario`, `semanal` o `mensual`.
+- La nota de una review debe estar entre 0 y 10.
+- No se permiten nombres, fechas o comentarios vacíos.
+
 ---
 
-## Ejemplo rápido de uso
+# Conceptos de Programación Orientada a Objetos utilizados
 
+## Clases y objetos
+
+El sistema se organiza mediante clases como `Habito`, `HabitoCheck`, `HabitoCantidad`, `Rutina` y `Review`.
+
+## Encapsulación
+
+Se usan atributos protegidos y privados para controlar el acceso a los datos:
+
+```text
+_identificador
+_activo
+__comentario
+```
+
+## Herencia
+
+`HabitoCheck` y `HabitoCantidad` heredan de `Habito`.
+
+```text
+Habito
+├── HabitoCheck
+└── HabitoCantidad
+```
+
+## Polimorfismo
+
+Cada tipo de hábito puede implementar el método `cumplido()` según sus propias reglas.
+
+## Clases abstractas
+
+La clase `Habito` utiliza `ABC` y `@abstractmethod` para obligar a las clases hijas a implementar ciertos métodos.
+
+## Sobrecarga de operadores
+
+Se utiliza sobrecarga para comparar hábitos, por ejemplo mediante `__lt__`, comparando su importancia.
+
+---
+
+# Gestión de excepciones
+
+El proyecto incluye validaciones y excepciones para controlar errores como:
+
+- importancia fuera de rango
+- frecuencia inválida
+- nombre vacío
+- nota inválida
+- comentario vacío
+- fecha inválida
+- tipo de dato incorrecto
+
+Esto evita que se creen objetos con estados incoherentes.
+
+---
+
+# Ejemplo rápido de uso
 
 ```python
 from Entidades.HabitoCheck import HabitoCheck
 
-habito1 = HabitoCheck("Hacer ejercicio")
-habito2 = HabitoCheck("Leer 20 minutos")
+habito = HabitoCheck(
+    identificador=1,
+    nombre="Hacer ejercicio",
+    frecuencia="diario",
+    importancia=5
+)
 
-print(habito1)
-print(habito2)
-
-habito1.marcar_completado()
-
-print(habito1)
-print(habito2)
+print(habito)
 ```
-
 
 ---
 
-## Diagrama UML de clases (Mermaid)
+# Ejemplo de review
+
+```python
+from Entidades.HabitoCheck import HabitoCheck
+from Entidades.ReviewHabito import Review
+
+habito = HabitoCheck(
+    identificador=1,
+    nombre="Hacer ejercicio",
+    frecuencia="diario",
+    importancia=5
+)
+
+review = Review(
+    fecha="2026-05-15",
+    nota=9,
+    comentario="Buen progreso durante la semana",
+    habito=habito
+)
+
+habito.poner_review(review)
+```
+
+---
+
+# Notas
+
+- El código está organizado siguiendo una arquitectura por capas.
+- Las entidades contienen las reglas principales del dominio.
+- Los servicios coordinan las operaciones de la aplicación.
+- La UI se limita a interactuar con el usuario.
+- El proyecto aplica conceptos vistos en Programación II: clases, objetos, herencia, encapsulación, polimorfismo, clases abstractas, excepciones y sobrecarga de operadores.
+
+---
+
+# Mermaid
 
 ```mermaid
 classDiagram
-    class Habito
-    class HabitoCheck
-    class HabitoCantidad
-    class Notificable
-    class Review
-    class Rutina
-    class RepositorioHabito
-    class RepositorioReviewHabito
-    class ServiciosHabitos
-    class ServiciosReviewHabito
-    class PantallaHabitos
+direction LR
 
-    Habito <|-- HabitoCheck
-    Habito <|-- HabitoCantidad
-    Notificable <|.. HabitoCheck
-    Habito "1" o-- "0..*" Review
-    Rutina "1" o-- "0..*" Habito
-    RepositorioHabito "1" o-- "0..*" Habito
-    RepositorioReviewHabito "1" o-- "0..*" Review
-    ServiciosHabitos --> RepositorioHabito
-    ServiciosReviewHabito --> RepositorioReviewHabito
-    PantallaHabitos --> ServiciosHabitos
-```
-
----
-
-## Diagrama de arquitectura C4 (Mermaid)
-
-```mermaid
-C4Container
-title Arquitectura por capas - Gestor de Hábitos
-
-Person(usuario, "Usuario", "Interactúa con la aplicación")
-
-System_Boundary(app, "Aplicación Gestor de Hábitos") {
-    Container(ui, "Capa de Presentación", "PantallaHabitos (CLI)", "Menú e interacción con el usuario")
-    Container(appsvc, "Capa de Aplicación", "ServiciosHabitos / ServiciosReviewHabito", "Coordina casos de uso")
-    Container(domain, "Capa de Dominio", "Habito, HabitoCheck, HabitoCantidad, Rutina, Review", "Reglas del negocio")
-    Container(data, "Capa de Persistencia", "RepositorioHabito / RepositorioReviewHabito", "Almacenamiento en memoria")
+class Habito {
+  <<abstract>>
+  +total_habitos
+  -int _identificador
+  -str _nombre
+  -str _frecuencia
+  -bool _activo
+  -int _importancia
+  -list~str~ _fecha
+  -list~Review~ _reviews
+  +identificador int
+  +nombre str
+  +frecuencia str
+  +activo bool
+  +importancia int
+  +poner_review(review) void
+  +activar() void
+  +pausar() void
+  +total() int
+  +cumplido()* bool
+  +__lt__(other) bool
 }
 
-Rel(usuario, ui, "Usa")
-Rel(ui, appsvc, "Solicita acciones")
-Rel(appsvc, domain, "Aplica lógica del dominio")
-Rel(appsvc, data, "Lee y guarda información")
-Rel(data, domain, "Persistencia de entidades")
+class HabitoCheck {
+  -bool _completado
+  +completado bool
+  +marcar_completado() void
+  +reiniciar() void
+  +cumplido() bool
+  +notificar() void
+}
+
+class HabitoCantidad {
+  -int _objetivo
+  -int _cantidad_actual
+  +objetivo int
+  +cantidad_actual int
+  +agregar_cantidad(cantidad) void
+  +reiniciar() void
+  +cumplido() bool
+  +notificar() void
+}
+
+class Notificable {
+  +notificar(mensaje, cumplido) void
+  +mensaje_alerta() str
+}
+
+class Review {
+  -str _fecha
+  -int _nota
+  -str __comentario
+  -Habito _habito
+  +comentario str
+  +nota int
+  +fecha str
+  +habito Habito
+}
+
+class Rutina {
+  -str _nombre
+  -list~Habito~ _habitos
+  +nombre str
+  +habitos list~Habito~
+  +agregar_habito(habito) void
+  +resumen() void
+}
+
+class RepositorioHabito {
+  +ARCHIVO
+  -dict~int, Habito~ _habitos
+  -_cargar() void
+  -_guardar() void
+  +agregar(habito) void
+  +eliminar(identificador) bool
+  +obtener(identificador) Habito
+  +obtener_todos() list~Habito~
+}
+
+class RepositorioReviewHabito {
+  +ARCHIVO
+  -list~Review~ _reviews
+  -_cargar() void
+  -_guardar() void
+  +anadir_review(review) void
+  +mostrar_reviews() list~Review~
+  +eliminar_review(review) void
+  +total_reviews() int
+}
+
+class ServiciosHabitos {
+  -RepositorioHabito _repositorio
+  +agregar_habito(habito) void
+  +eliminar_habito(identificador) bool
+  +listar_todos() list~Habito~
+  +listar_cumplidos() list~Habito~
+  +resumen() tuple
+}
+
+class ServiciosReviewHabito {
+  -RepositorioReviewHabito _repositorio
+  +anadir_review(review) void
+  +mostrar_reviews() list~Review~
+  +nota_media_reviews() float
+  +buscar_review(fecha) list~Review~
+  +review_por_nota(nota) list~Review~
+}
+
+class PantallaHabitos {
+  -RepositorioHabito _repo
+  -ServiciosHabitos _servicios
+  -list~Rutina~ _rutinas
+  -RepositorioReviewHabito _repo_review
+  -ServiciosReviewHabito _servicios_review
+  +iniciar() void
+  +crear_habito() void
+  +ver_habitos() void
+  +eliminar_habito() void
+  +crear_rutina() void
+  +habito_a_rutina() void
+  +ver_rutinas() void
+  +agregar_review() void
+  +ver_reviews() void
+}
+
+Habito <|-- HabitoCheck
+Habito <|-- HabitoCantidad
+Notificable <|.. HabitoCheck
+Habito "1" o-- "0..*" Review : reviews
+Review --> Habito : valora
+Rutina "1" o-- "0..*" Habito : contiene
+RepositorioHabito "1" o-- "0..*" Habito : almacena
+RepositorioReviewHabito "1" o-- "0..*" Review : almacena
+ServiciosHabitos --> RepositorioHabito : usa
+ServiciosReviewHabito --> RepositorioReviewHabito : usa
+PantallaHabitos --> ServiciosHabitos : usa
+PantallaHabitos --> ServiciosReviewHabito : usa
+PantallaHabitos --> RepositorioHabito : usa
+PantallaHabitos --> RepositorioReviewHabito : usa
+PantallaHabitos "1" o-- "0..*" Rutina : gestiona
 ```
 
 ---
- 
-## Estado
-Primera versión funcional del proyecto, con todas las funcionalidades principales implementadas.
+
+# Arquitectura C4
+
+# Diagrama C4 — Nivel Contexto
+
+Este diagrama representa la visión general del sistema y cómo interactúa el usuario con la aplicación.
+
+El usuario utiliza el **Sistema de Gestión de Hábitos** para crear, consultar y administrar hábitos, rutinas y reviews.  
+El sistema almacena la información en dos archivos JSON:
+
+- `habitos.json` → guarda los hábitos.
+- `reviews.json` → guarda las reviews asociadas a los hábitos.
+
+Relaciones principales:
+
+- El usuario interactúa directamente con el sistema.
+- El sistema lee y escribe datos en los archivos JSON para mantener la persistencia de la información.
 
 ---
+
+# Diagrama C4 — Nivel Contenedores
+
+Este diagrama muestra la arquitectura interna del sistema dividida en contenedores o módulos principales.
+
+## Componentes principales
+
+### PantallaHabitos
+
+Es la interfaz de consola con la que interactúa el usuario.
+
+Permite:
+
+- Crear hábitos
+- Ver hábitos
+- Crear rutinas
+- Añadir reviews
+- Consultar información
+
+### ServiciosHabitos
+
+Contiene la lógica de negocio relacionada con los hábitos.
+
+Se encarga de:
+
+- Validar operaciones
+- Gestionar hábitos cumplidos
+- Generar resúmenes
+- Coordinar acceso al repositorio
+
+### ServiciosReviewHabito
+
+Gestiona la lógica de negocio relacionada con las reviews:
+
+- Añadir reviews
+- Calcular medias
+- Buscar reviews
+- Filtrar por nota
+
+### RepositorioHabito
+
+Gestiona la persistencia de hábitos.
+
+Lee y escribe datos en `habitos.json`.
+
+### RepositorioReviewHabito
+
+Gestiona la persistencia de reviews.
+
+Lee y escribe datos en `reviews.json`.
+
+### Modelos de Dominio
+
+Representan las entidades principales del sistema:
+
+- `Habito`
+- `HabitoCheck`
+- `HabitoCantidad`
+- `Rutina`
+- `Review`
+
+Estas clases contienen los atributos y comportamientos fundamentales de la aplicación.
+
+---
+
+# Flujo general del sistema
+
+1. El usuario interactúa con `PantallaHabitos`.
+2. La pantalla llama a los servicios correspondientes.
+3. Los servicios aplican la lógica de negocio.
+4. Los repositorios gestionan la persistencia.
+5. Los datos se almacenan en archivos JSON.
