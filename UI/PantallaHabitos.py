@@ -7,7 +7,6 @@ from Persistencia.RepositorioHabito import RepositorioHabito
 from Servicios.ServiciosHabitos import ServiciosHabitos
 from Persistencia.RepositorioReviewHabito import RepositorioReviewHabito
 from Servicios.ServiciosReviewHabito import ServiciosReviewHabito
-from UI.Excepciones import *
 
 class PantallaHabitos:
     """

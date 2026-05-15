@@ -112,4 +112,5 @@ class Habito(ABC):
         pass
 
     def __repr__(self) -> str:
+
         return f"{self.__class__.__name__}({self._identificador}, '{self._nombre}', '{self._frecuencia}', {self._importancia})"

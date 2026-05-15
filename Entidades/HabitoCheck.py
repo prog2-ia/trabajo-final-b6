@@ -46,4 +46,4 @@ class HabitoCheck(Habito, Notificable):
         return f"[CHECK] {self._nombre} ({self._frecuencia}) - {estado}"
 
     def __repr__(self) -> str:
-        return f"HabitoCheck({self._identificador}, '{self._nombre}', '{self._frecuencia}', {self._importancia})"
+        ({self._identificador}, '{self._nombre}', '{self._frecuencia}', {self._importancia})"

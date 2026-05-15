@@ -47,6 +47,9 @@ class Review:
     def __str__(self)-> str:
         return f"Se ha añadido la siguiente review al hábito con id {self._habito.identificador}:  fecha: {self._fecha}, nota: {self.nota}/10"
 
+    def __repr__(self) -> str:
+
+        return f"Review('{self._fecha}', {self._nota}, '{self.comentario}', {self._habito.identificador})"
 
 class NotaInvalidaError(ErrorHabitos):
     pass
