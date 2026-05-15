@@ -416,91 +416,63 @@ PantallaHabitos "1" o-- "0..*" Rutina : gestiona
 
 # Arquitectura C4
 
-# Diagrama C4 — Nivel Contexto
+# Diagrama C4 — Nivel 1 (Contexto)
 
-Este diagrama representa la visión general del sistema y cómo interactúa el usuario con la aplicación.
+```mermaid
+flowchart LR
 
-El usuario utiliza el **Sistema de Gestión de Hábitos** para crear, consultar y administrar hábitos, rutinas y reviews.  
-El sistema almacena la información en dos archivos JSON:
+    Usuario["Usuario"]
 
-- `habitos.json` → guarda los hábitos.
-- `reviews.json` → guarda las reviews asociadas a los hábitos.
+    Sistema["Sistema de Gestión de Hábitos"]
 
-Relaciones principales:
+    Habitos[("habitos.json")]
+    Reviews[("reviews.json")]
 
-- El usuario interactúa directamente con el sistema.
-- El sistema lee y escribe datos en los archivos JSON para mantener la persistencia de la información.
+    Usuario -->|"Gestiona hábitos y rutinas"| Sistema
 
----
-
-# Diagrama C4 — Nivel Contenedores
-
-Este diagrama muestra la arquitectura interna del sistema dividida en contenedores o módulos principales.
-
-## Componentes principales
-
-### PantallaHabitos
-
-Es la interfaz de consola con la que interactúa el usuario.
-
-Permite:
-
-- Crear hábitos
-- Ver hábitos
-- Crear rutinas
-- Añadir reviews
-- Consultar información
-
-### ServiciosHabitos
-
-Contiene la lógica de negocio relacionada con los hábitos.
-
-Se encarga de:
-
-- Validar operaciones
-- Gestionar hábitos cumplidos
-- Generar resúmenes
-- Coordinar acceso al repositorio
-
-### ServiciosReviewHabito
-
-Gestiona la lógica de negocio relacionada con las reviews:
-
-- Añadir reviews
-- Calcular medias
-- Buscar reviews
-- Filtrar por nota
-
-### RepositorioHabito
-
-Gestiona la persistencia de hábitos.
-
-Lee y escribe datos en `habitos.json`.
-
-### RepositorioReviewHabito
-
-Gestiona la persistencia de reviews.
-
-Lee y escribe datos en `reviews.json`.
-
-### Modelos de Dominio
-
-Representan las entidades principales del sistema:
-
-- `Habito`
-- `HabitoCheck`
-- `HabitoCantidad`
-- `Rutina`
-- `Review`
-
-Estas clases contienen los atributos y comportamientos fundamentales de la aplicación.
+    Sistema -->|"Lee y escribe hábitos"| Habitos
+    Sistema -->|"Lee y escribe reviews"| Reviews
+```
 
 ---
 
-# Flujo general del sistema
+# Diagrama C4 — Nivel 2 (Contenedores)
 
-1. El usuario interactúa con `PantallaHabitos`.
-2. La pantalla llama a los servicios correspondientes.
-3. Los servicios aplican la lógica de negocio.
-4. Los repositorios gestionan la persistencia.
-5. Los datos se almacenan en archivos JSON.
+```mermaid
+flowchart TB
+
+    Usuario["Usuario"]
+
+    subgraph Sistema["Sistema de Gestión de Hábitos"]
+
+        Pantalla["PantallaHabitos<br>Interfaz de consola"]
+
+        ServiciosHabitos["ServiciosHabitos<br>Lógica de hábitos"]
+
+        ServiciosReviews["ServiciosReviewHabito<br>Lógica de reviews"]
+
+        RepoHabitos["RepositorioHabito<br>Persistencia hábitos"]
+
+        RepoReviews["RepositorioReviewHabito<br>Persistencia reviews"]
+
+        Modelos["Modelos de Dominio<br>Habito<br>HabitoCheck<br>HabitoCantidad<br>Rutina<br>Review"]
+
+    end
+
+    Habitos[("habitos.json")]
+    Reviews[("reviews.json")]
+
+    Usuario --> Pantalla
+
+    Pantalla --> ServiciosHabitos
+    Pantalla --> ServiciosReviews
+
+    ServiciosHabitos --> RepoHabitos
+    ServiciosReviews --> RepoReviews
+
+    ServiciosHabitos --> Modelos
+    ServiciosReviews --> Modelos
+
+    RepoHabitos --> Habitos
+    RepoReviews --> Reviews
+```
