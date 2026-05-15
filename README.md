@@ -264,7 +264,7 @@ habito.poner_review(review)
 
 ---
 
-# Mermaid
+# Diagrama UML de clases (Mermaid)
 
 ```mermaid
 classDiagram
@@ -414,7 +414,7 @@ PantallaHabitos "1" o-- "0..*" Rutina : gestiona
 
 ---
 
-# Arquitectura C4
+# Diagrama de arquitectura C4 (Mermaid)
 
 # Diagrama C4 — Nivel 1 (Contexto)
 
