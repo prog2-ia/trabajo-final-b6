@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Entidades.ReviewHabito import Review
+
 
 class Habito(ABC):
     """
@@ -8,21 +8,27 @@ class Habito(ABC):
     """
     total_habitos = 0
 
-    def __init__(self, identificador:int , nombre: str, frecuencia:str, importancia: int, fecha: list[str] | None = None) -> None:
-        self._identificador : int = identificador
-        self.nombre : str = nombre
-        self.frecuencia : str = frecuencia
+    def __init__(self, identificador: int, nombre: str, frecuencia: str,
+                 importancia: int, fecha: list[str] | None = None) -> None:
+
+        self._identificador: int = identificador
+        self.nombre: str = nombre
+        self.frecuencia: str = frecuencia
         self._activo: bool = True
-        # Podríamos usar Habitos.total_habitos y seguiría funcionando, pero si en un futuro separamos HabitoCheck y HabitoCantidad, se quedaría en la clase base
+
+        # Podríamos usar Habitos.total_habitos y seguiría funcionando,
+        # pero si en un futuro separamos HabitoCheck y HabitoCantidad,
+        # se quedaría en la clase base
         type(self).total_habitos += 1
-        self.importancia : int = importancia
+
+        self.importancia: int = importancia
 
         if fecha is None:
-            self._fecha : list[str] = []
+            self._fecha: list[str] = []
         else:
-            self._fecha  = fecha
+            self._fecha = fecha
 
-        self._reviews: list[str]= []
+        self._reviews: list["Review"] = []
 
     #Propiedades (control de acceso)
     @property
@@ -79,6 +85,11 @@ class Habito(ABC):
     #Métodos de instancia
 
     def poner_review(self, review:Review) -> None:
+        from Entidades.ReviewHabito import Review
+
+        if not isinstance(review, Review):
+            raise TypeError("La review debe ser un objeto Review")
+
         self._reviews.append(review)
 
     def activar(self) -> None:
